@@ -1,0 +1,41 @@
+{
+	"schemaVersion": 1,
+	"id": "shr1mpfmod",
+	"version": "${version}",
+	"name": "shr1mpfmod",
+	"description": "When cats away,the mice will play.",
+	"authors": [
+		"Shr1mp_zh"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/FabricMC/fabric-example-mod"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/shr1mpfmod/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"com.shr1mp4zh.fmod.Shr1mpfmod"
+		],
+		"client": [
+			"com.shr1mp4zh.fmod.Shr1mpfmodClient"
+		]
+	},
+	"mixins": [
+		"shr1mpfmod.mixins.json",
+		{
+			"config": "shr1mpfmod.client.mixins.json",
+			"environment": "client"
+		}
+	],
+	"depends": {
+		"fabricloader": ">=0.16.10",
+		"minecraft": "~1.21.4",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"another-mod": "*"
+	}
+}
