@@ -3,7 +3,7 @@
 	"package": "com.shr1mp4zh.fmod.mixin",
 	"compatibilityLevel": "JAVA_21",
 	"mixins": [
-		"ExampleMixin"
+      "FModMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
