@@ -12,6 +12,7 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 /*
@@ -52,7 +53,7 @@ public class ModBlocks {
      */
     public static AbstractBlock.Settings createDefaultAbstractBlockSettings(String id) {
         return AbstractBlock.Settings.create().strength(4f)
-                .requiresTool().sounds(BlockSoundGroup.AMETHYST_BLOCK).registryKey(createDefaultRegistryKey(id));
+                .requiresTool().sounds(BlockSoundGroup.AMETHYST_BLOCK).registryKey(createDefaultBlockRegistryKey(id));
     }
 
 
@@ -78,9 +79,9 @@ public class ModBlocks {
      * @param id 物品id
      * @return 返回生成的 RegistryKey<Block> 对象
      */
-    private static RegistryKey<Block> createDefaultRegistryKey(String id) {
+    private static RegistryKey<Block> createDefaultBlockRegistryKey(String id) {
         Identifier identifier = Identifier.of(Shr1mpfmod.MOD_ID, id);
-        return RegistryKey.of(RegistryKey.ofRegistry(identifier), identifier);
+        return RegistryKey.of(RegistryKeys.BLOCK, identifier);
     }
 
 

@@ -56,6 +56,6 @@ public class ModItems {
      */
     public static Item.Settings createDefaultItemSettings(String id) {
         Identifier identifier = Identifier.of(Shr1mpfmod.MOD_ID, id);
-        return new Item.Settings().registryKey(RegistryKey.of(RegistryKey.ofRegistry(identifier),identifier));
+        return new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM,identifier));
     }
 }
