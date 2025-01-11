@@ -58,4 +58,11 @@ public class ModItems {
         Identifier identifier = Identifier.of(Shr1mpfmod.MOD_ID, id);
         return new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM,identifier));
     }
+
+    /**
+     *  获取FirstItem 这里用于新建物品栏时使用
+     */
+    public static Item getFirstItem() {
+        return FIRST_ITEM;
+    }
 }

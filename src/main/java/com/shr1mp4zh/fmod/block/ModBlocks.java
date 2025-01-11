@@ -128,4 +128,12 @@ public class ModBlocks {
             this.itemSettings = itemSettings;
         }
     }
+
+    public static Block getFirstBlock() {
+        return FIRST_BLOCK;
+    }
+    public static Block getSecondBlock() {
+        return SECOND_BLOCK;
+    }
+
 }

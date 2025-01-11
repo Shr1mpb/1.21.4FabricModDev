@@ -1,5 +1,6 @@
 {
   "item.shr1mpfmod.first_item": "FirstItem",
   "item.shr1mpfmod.first_block": "FirstBlock",
-  "item.shr1mpfmod.second_block": "SecondBlock"
+  "item.shr1mpfmod.second_block": "SecondBlock",
+  "itemgroups.shr1mpfmod.first_item_group": "FirstItemGroup"
 }
