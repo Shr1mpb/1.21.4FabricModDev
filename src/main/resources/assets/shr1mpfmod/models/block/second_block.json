@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "shr1mpfmod:block/second_block"
+  }
+}

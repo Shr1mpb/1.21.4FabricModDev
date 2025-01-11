@@ -27,8 +27,12 @@ import net.minecraft.util.Identifier;
 public class ModBlocks {
 
     private static final Block FIRST_BLOCK = registerBlock(BlockSettingUnion.createDefaultBlockSettingUnion("first_block"), ItemGroups.BUILDING_BLOCKS);
-
-
+    private static final Block SECOND_BLOCK;
+    static{
+        BlockSettingUnion secondBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("second_block");
+        secondBlockSetting.getBlockSettings().sounds(BlockSoundGroup.NETHER_GOLD_ORE).strength(2f);
+        SECOND_BLOCK =  registerBlock(secondBlockSetting, ItemGroups.NATURAL);
+    }
     /**
      * 注册Block 传入两个设置(封装在内部类中) 勿动
      * @param blockSettingUnion 内部类对象 包含两个设置
