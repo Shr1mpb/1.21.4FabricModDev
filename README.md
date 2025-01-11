@@ -2,8 +2,17 @@
 
 ## 介绍
 
-这里是Shr1mp的MineCraft模组学习
-**游戏版本为Java 1.21.4**
+这里是Shr1mp的MineCraft Fabric模组开发学习
+
+如果你看完了这篇README，那么你也可以入门Minecraft的Fabric模组开发(1.21.2+)。方法就是观看这位博主在Youtube上的视频(因为那个视频只适用于1.21.2-，不过大多数的功能还是可以正常使用的)，并来我这里查看我封装好的方法。或者你也可以自己封装。
+
+**这里我用的版本为Java 1.21.4**
+
+在这里你可以**套用我封装好的各种方法**(例如创建物品、方块和物品栏等)。
+
+你可以直接去对应的类中寻找(**推荐**)。
+
+_如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@gmail.com(不常用)_ 
 
 ---
 
@@ -14,9 +23,26 @@
 * 我的仓库这几天会持续更新，跟着旧版本的教学走一次，如果无法成功，我会找解决方法，之后封装好我的函数。**每个类或函数的用法我已经写在了对应的java类中。**
 * 相应的，如果要添加材质或进行其他操作，请选定first_xxx然后参照assets中的文件。
 
-## Tips：
-* resource/assets/【modid】中是添加材质和模型的地方。就Item举例而言，三层结构：items -> models -> textures
-* 对于resource/data/【modid】/recipe中的配方，包括合成、冶炼等，你可以在External Libraries中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。
+## Tips/食用方法：
+
+无论如何，我都建议你去查看这位博主的视频[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe)。在遇到不生效的情况时，可以来这里查找解决方案，或者使用我封装好的方法。
+
+---
+* **多使用External Libraries。**
+对于resource/data/【modid】/recipe中的配方，包括合成、冶炼等，你可以在External Libraries中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
+
+
+* resource/assets/【modid】中是添加**材质和模型**的地方。就Item举例而言，三层结构：items -> models -> textures，仿照书写即可
+
+
+* **提交记录**中的Init就是有对API进行封装的提交，Perf或者Fix就是对这些东西的改进或修复
+
+
+* 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在resource/data/tags/block/mineable的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在resource/data/【modid】/loot_table/blocks中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
+
+
+
+
 ---
 
 下面是一些我的废话：

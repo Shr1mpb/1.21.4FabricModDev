@@ -5,6 +5,7 @@ import com.shr1mp4zh.fmod.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
+import net.minecraft.block.ExperienceDroppingBlock;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -15,6 +16,8 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.math.intprovider.UniformIntProvider;
+
 /*
     Block的注册较为复杂 这里也封装成了一行代码
         传入内部类对象(包含blockSettings 和 itemSettings) 和 要加入的组 即可
@@ -26,24 +29,48 @@ import net.minecraft.util.Identifier;
  */
 public class ModBlocks {
 
-    private static final Block FIRST_BLOCK = registerBlock(BlockSettingUnion.createDefaultBlockSettingUnion("first_block"), ItemGroups.BUILDING_BLOCKS);
+    private static final Block FIRST_BLOCK;
     private static final Block SECOND_BLOCK;
     static{
-        BlockSettingUnion secondBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("second_block");
-        secondBlockSetting.getBlockSettings().sounds(BlockSoundGroup.NETHER_GOLD_ORE).strength(2f);
-        SECOND_BLOCK =  registerBlock(secondBlockSetting, ItemGroups.NATURAL);
+        BlockSettingUnion firstBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("first_block",true);
+        firstBlockSetting.getBlockSettings().strength(6f);
+        FIRST_BLOCK = registerBlock(firstBlockSetting, ItemGroups.BUILDING_BLOCKS);
+
+        BlockSettingUnion secondBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("second_block",true);
+        secondBlockSetting.getBlockSettings().sounds(BlockSoundGroup.DEEPSLATE).strength(12f);
+        SECOND_BLOCK = registerExperienceBlock(secondBlockSetting, 10, 12, ItemGroups.NATURAL);
     }
+
+
     /**
-     * 注册Block 传入两个设置(封装在内部类中) 勿动
+     * 注册Block  传入两个设置(封装在内部类中) 勿动
      * @param blockSettingUnion 内部类对象 包含两个设置
      * @param itemGroups 要加入的组
      * @return 返回添加的Block
      */
     @SafeVarargs
-    private static Block registerBlock(BlockSettingUnion blockSettingUnion, RegistryKey<ItemGroup>... itemGroups) {
+    private static Block registerBlock(BlockSettingUnion blockSettingUnion,RegistryKey<ItemGroup>... itemGroups) {
         AbstractBlock.Settings blockSettings = blockSettingUnion.getBlockSettings();
         Item.Settings itemSettings = blockSettingUnion.getItemSettings();
         Block block = new Block(blockSettings);
+        registerBlockItem(block, itemSettings, itemGroups);
+        return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
+    }
+
+
+    /**
+     * 注册会掉落经验的Block 即ExperienceBlock 传入两个设置(封装在内部类中) 勿动
+     * @param blockSettingUnion 内部类对象 包含两个设置
+     * @param itemGroups 要加入的组
+     * @param minExp 最小掉落的经验
+     * @param maxExp 最多掉落的经验
+     * @return 返回添加的Block
+     */
+    @SafeVarargs
+    private static Block registerExperienceBlock(BlockSettingUnion blockSettingUnion, int minExp, int maxExp,RegistryKey<ItemGroup>... itemGroups) {
+        AbstractBlock.Settings blockSettings = blockSettingUnion.getBlockSettings();
+        Item.Settings itemSettings = blockSettingUnion.getItemSettings();
+        Block block = new ExperienceDroppingBlock(UniformIntProvider.create(minExp,maxExp), blockSettings);
         registerBlockItem(block, itemSettings, itemGroups);
         return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
     }
@@ -56,8 +83,8 @@ public class ModBlocks {
      * @return 返回设置
      */
     public static AbstractBlock.Settings createDefaultAbstractBlockSettings(String id) {
-        return AbstractBlock.Settings.create().strength(4f)
-                .requiresTool().sounds(BlockSoundGroup.AMETHYST_BLOCK).registryKey(createDefaultBlockRegistryKey(id));
+        return AbstractBlock.Settings.create().strength(3f)
+                .sounds(BlockSoundGroup.AMETHYST_BLOCK).registryKey(createDefaultBlockRegistryKey(id));
     }
 
 
@@ -104,12 +131,15 @@ public class ModBlocks {
         AbstractBlock.Settings blockSettings;
         Item.Settings itemSettings;
 
-        public static BlockSettingUnion createDefaultBlockSettingUnion(String id) {
-            return new BlockSettingUnion(id);
+        public static BlockSettingUnion createDefaultBlockSettingUnion(String id, boolean requiresTool) {
+            return new BlockSettingUnion(id,requiresTool);
         }
-        private BlockSettingUnion(String id){
+        private BlockSettingUnion(String id,boolean requiresTool){
             this.blockSettings = createDefaultAbstractBlockSettings(id);
             this.itemSettings = ModItems.createDefaultItemSettings(id);
+            if (requiresTool) {//需要工具时 再设置requiresTool()
+                blockSettings.requiresTool();
+            }
         }
 
         public AbstractBlock.Settings getBlockSettings() {
