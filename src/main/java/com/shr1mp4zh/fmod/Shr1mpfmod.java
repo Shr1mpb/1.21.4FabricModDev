@@ -1,5 +1,6 @@
 package com.shr1mp4zh.fmod;
 
+import com.shr1mp4zh.fmod.block.ModBlocks;
 import com.shr1mp4zh.fmod.item.ModItems;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,5 +23,6 @@ public class Shr1mpfmod implements ModInitializer {
 
 		LOGGER.info("Author Shr1mp_zh,QQ Number:1205874457");
 		ModItems.initialize();
+		ModBlocks.initialize();
 	}
 }

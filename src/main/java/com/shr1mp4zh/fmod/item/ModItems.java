@@ -18,7 +18,7 @@ public class ModItems {
      *
      */
     //注册第一个物品
-    public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
+    private static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
 
 
 
@@ -39,7 +39,8 @@ public class ModItems {
      * @param itemGroups 要注册到的地方 可以为多个 通过ItemsGroups.XXX拿到
      * @return 返回注册的物品
      */
-    public static Item registerItem(Item.Settings settings, RegistryKey<ItemGroup>... itemGroups) {
+    @SafeVarargs
+    private static Item registerItem(Item.Settings settings, RegistryKey<ItemGroup>... itemGroups) {
         Identifier identifier = settings.getModelId();
         Item registeredItem = Registry.register(Registries.ITEM, identifier, new Item(settings));
         for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
