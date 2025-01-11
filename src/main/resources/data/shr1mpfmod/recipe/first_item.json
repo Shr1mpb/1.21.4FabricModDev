@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "building",
+  "ingredients":[
+      "shr1mpfmod:first_block"
+  ],
+  "result": {
+    "count": 9,
+    "id": "shr1mpfmod:first_item"
+  }
+}
