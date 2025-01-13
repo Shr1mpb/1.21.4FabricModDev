@@ -2,5 +2,6 @@
   "item.shr1mpfmod.first_item": "第一个物品",
   "item.shr1mpfmod.first_block": "第一个方块",
   "item.shr1mpfmod.second_block": "第二个方块",
-  "itemgroups.shr1mpfmod.first_item_group": "第一个物品组"
+  "itemgroups.shr1mpfmod.first_item_group": "第一个物品组",
+  "item.shr1mpfmod.chisel": "魔法凿子"
 }

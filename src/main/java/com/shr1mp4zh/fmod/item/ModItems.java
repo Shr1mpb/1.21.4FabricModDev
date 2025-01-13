@@ -1,6 +1,7 @@
 package com.shr1mp4zh.fmod.item;
 
 import com.shr1mp4zh.fmod.Shr1mpfmod;
+import com.shr1mp4zh.fmod.item.custom.ChiselItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -8,18 +9,21 @@ import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
 
+import java.lang.reflect.InvocationTargetException;
+
 public class ModItems {
 
     /**
      * 下面开始注册物品 仿照这里的即可
      *      流程：
      *          定义好变量名、定义好物品名(就是这里的createDefaultItemSettings()的参数)、定义好要加入的物品组的名字
-     *          要加入的物品组调用ItemGroups.XXX即可获取 例如这里的 ItemGroups.INGREDIENTS 是原材料
+     *          要加入的物品组调用ItemGroups.XXX即可获取 可以加也可以不加(如要放进自己的自定义物品类中的情况) 例如这里的 ItemGroups.INGREDIENTS 是原材料
      *
      */
-    //注册第一个物品
-    private static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
-
+    //注册第一个物品 像这里既加入了原料物品组 又在ModItemGroups类中加入了自定义的物品组里
+    public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
+    //注册一个自定义物品 这里就没有加入任何物品组，只在ModItemGroups里加入了自定义的物品组
+    public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(32));
 
 
 
@@ -48,6 +52,29 @@ public class ModItems {
         }
         return registeredItem;
     }
+    /**
+     * 注册自定义物品的方法 勿动
+     * @param itemClass 注册自定义物品的类型
+     * @param settings 注册的物品的属性 通过下面的createDefaultItemSettings创建 需要传入id
+     * @param itemGroups 要注册到的地方 可以为多个 通过ItemsGroups.XXX拿到
+     * @return 返回注册的物品
+     */
+    @SafeVarargs
+    private static Item registerCustomItem(Class itemClass,Item.Settings settings, RegistryKey<ItemGroup>... itemGroups) {
+        Identifier identifier = settings.getModelId();
+        Item customItem;
+        try {
+            //这里用了一下反射 创建一下自定义物品的类(运行时类) 并把Settings封装进去
+            customItem = (Item) itemClass.getConstructor(Item.Settings.class).newInstance(settings);
+        } catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
+            throw new RuntimeException(e);
+        }
+        Item registeredItem = Registry.register(Registries.ITEM, identifier, customItem);
+        for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
+            ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
+        }
+        return registeredItem;
+    }
 
     /**
      * 根据物品名字创建一个带有ID的Item.Settings 勿动
@@ -59,10 +86,5 @@ public class ModItems {
         return new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM,identifier));
     }
 
-    /**
-     *  获取FirstItem 这里用于新建物品栏时使用
-     */
-    public static Item getFirstItem() {
-        return FIRST_ITEM;
-    }
+
 }

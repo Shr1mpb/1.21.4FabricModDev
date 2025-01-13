@@ -16,12 +16,13 @@ import java.util.List;
 
 public class ModItemGroups {
     //仿照这里的语句以新建一个物品组
-    private static final ItemGroup FIRST_ITEM_GROUP;
+    public static final ItemGroup FIRST_ITEM_GROUP;
     static {
         ArrayList<Object> firstItemList = new ArrayList<>();
-        firstItemList.add(ModItems.getFirstItem());
-        firstItemList.add(ModBlocks.getFirstBlock());
-        firstItemList.add(ModBlocks.getSecondBlock());
+        firstItemList.add(ModItems.FIRST_ITEM);
+        firstItemList.add(ModBlocks.FIRST_BLOCK);
+        firstItemList.add(ModBlocks.SECOND_BLOCK);
+        firstItemList.add(ModItems.CHISEL);
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }
 

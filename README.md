@@ -23,7 +23,7 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * 我的仓库这几天会持续更新，跟着旧版本的教学走一次，如果无法成功，我会找解决方法，之后封装好我的函数。**每个类或函数的用法我已经写在了对应的java类中。**
 * 相应的，如果要添加材质或进行其他操作，请选定first_xxx然后参照assets中的文件。
 
-## Tips/食用方法：
+## Tips/食用方法/简易教程：
 
 无论如何，我都建议你去查看这位博主的视频[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe)。在遇到不生效的情况时，可以来这里查找解决方案，或者使用我封装好的方法。
 
@@ -41,6 +41,8 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在resource/data/tags/block/mineable的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在resource/data/【modid】/loot_table/blocks中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
 
 
+* **自定义物品(创造超脱原版的特定功能的新物品)**：参照src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的registerCustomItem()方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
+ Item类也有很多子类，有原版中实现各种各样功能的类供你参考。选中Item，使用Ctrl+H即可查看(IDEA中)。
 
 
 ---

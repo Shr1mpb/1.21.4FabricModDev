@@ -29,8 +29,8 @@ import net.minecraft.util.math.intprovider.UniformIntProvider;
  */
 public class ModBlocks {
 
-    private static final Block FIRST_BLOCK;
-    private static final Block SECOND_BLOCK;
+    public static final Block FIRST_BLOCK;
+    public static final Block SECOND_BLOCK;
     static{
         BlockSettingUnion firstBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("first_block",true);
         firstBlockSetting.getBlockSettings().strength(6f);
@@ -159,11 +159,5 @@ public class ModBlocks {
         }
     }
 
-    public static Block getFirstBlock() {
-        return FIRST_BLOCK;
-    }
-    public static Block getSecondBlock() {
-        return SECOND_BLOCK;
-    }
 
 }
