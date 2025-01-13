@@ -29,20 +29,23 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 ---
 * **多使用External Libraries。**
-对于resource/data/【modid】/recipe中的配方，包括合成、冶炼等，你可以在External Libraries中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
+对于`resource/data/【modid】/recipe`中的配方，包括合成、冶炼等，你可以在`External Libraries`中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
 
 
-* resource/assets/【modid】中是添加**材质和模型**的地方。就Item举例而言，三层结构：items -> models -> textures，仿照书写即可
+* `resource/assets/【modid】`中是添加**材质和模型**的地方。就Item举例而言，三层结构：items -> models -> textures，仿照书写即可
 
 
 * **提交记录**中的Init就是有对API进行封装的提交，Perf或者Fix就是对这些东西的改进或修复
 
 
-* 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在resource/data/tags/block/mineable的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在resource/data/【modid】/loot_table/blocks中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
+* 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在`resource/data/tags/block/mineable`的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在`resource/data/【modid】/loot_table/blocks`中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
 
 
-* **自定义物品(创造超脱原版的特定功能的新物品)**：参照src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的registerCustomItem()方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
+* **自定义物品(创造超脱原版的特定功能的新物品)**：参照`src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem`类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的registerCustomItem()方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
  Item类也有很多子类，有原版中实现各种各样功能的类供你参考。选中Item，使用Ctrl+H即可查看(IDEA中)。
+
+
+* **自定义方块**：_与自定义物品相似_，参照`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`，然后再将它通过registerCustomBlock()方法注册到游戏中。
 
 
 ---

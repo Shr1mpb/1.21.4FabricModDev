@@ -9,12 +9,10 @@ import net.minecraft.item.ItemUsageContext;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
-import javax.swing.*;
 import java.util.Map;
 import java.util.Objects;
 
@@ -24,13 +22,19 @@ import java.util.Objects;
  *
  */
 public class ChiselItem extends Item {
+    public static final int MAX_DAMAGE = 50;
     private static final Map<Block, Block> CHISEL_MAP =
             Map.of(
                     Blocks.STONE, Blocks.STONE_BRICKS,
                     Blocks.END_STONE, Blocks.END_STONE_BRICKS,
                     Blocks.OAK_LOG, ModBlocks.FIRST_BLOCK,
-                    Blocks.GOLD_BLOCK, Blocks.NETHERITE_BLOCK
-            );
+                    Blocks.GOLD_BLOCK, Blocks.NETHERITE_BLOCK,
+
+                    Blocks.STONE_BRICKS, Blocks.STONE,
+                    Blocks.END_STONE_BRICKS, Blocks.END_STONE,
+                    ModBlocks.FIRST_BLOCK, Blocks.OAK_LOG,
+                    Blocks.NETHERITE_BLOCK, Blocks.GOLD_BLOCK
+                    );
 
     public ChiselItem(Settings settings) {
         super(settings);

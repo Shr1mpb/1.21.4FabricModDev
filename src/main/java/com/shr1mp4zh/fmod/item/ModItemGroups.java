@@ -23,6 +23,7 @@ public class ModItemGroups {
         firstItemList.add(ModBlocks.FIRST_BLOCK);
         firstItemList.add(ModBlocks.SECOND_BLOCK);
         firstItemList.add(ModItems.CHISEL);
+        firstItemList.add(ModBlocks.MAGIC_BLOCK);
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }
 

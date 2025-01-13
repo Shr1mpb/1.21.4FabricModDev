@@ -23,7 +23,7 @@ public class ModItems {
     //注册第一个物品 像这里既加入了原料物品组 又在ModItemGroups类中加入了自定义的物品组里
     public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
     //注册一个自定义物品 这里就没有加入任何物品组，只在ModItemGroups里加入了自定义的物品组
-    public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(32));
+    public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(ChiselItem.MAX_DAMAGE));
 
 
 

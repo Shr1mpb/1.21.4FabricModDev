@@ -1,6 +1,7 @@
 package com.shr1mp4zh.fmod.block;
 
 import com.shr1mp4zh.fmod.Shr1mpfmod;
+import com.shr1mp4zh.fmod.block.custom.MagicBlock;
 import com.shr1mp4zh.fmod.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
@@ -18,6 +19,9 @@ import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
+import java.lang.reflect.InvocationTargetException;
+
+
 /*
     Block的注册较为复杂 这里也封装成了一行代码
         传入内部类对象(包含blockSettings 和 itemSettings) 和 要加入的组 即可
@@ -31,6 +35,7 @@ public class ModBlocks {
 
     public static final Block FIRST_BLOCK;
     public static final Block SECOND_BLOCK;
+    public static final Block MAGIC_BLOCK;
     static{
         BlockSettingUnion firstBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("first_block",true);
         firstBlockSetting.getBlockSettings().strength(6f);
@@ -39,6 +44,9 @@ public class ModBlocks {
         BlockSettingUnion secondBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("second_block",true);
         secondBlockSetting.getBlockSettings().sounds(BlockSoundGroup.DEEPSLATE).strength(12f);
         SECOND_BLOCK = registerExperienceBlock(secondBlockSetting, 10, 12, ItemGroups.NATURAL);
+
+        BlockSettingUnion magicBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("magic_block", false);
+        MAGIC_BLOCK = registerCustomBlock(MagicBlock.class, magicBlockSetting);
     }
 
 
@@ -53,6 +61,29 @@ public class ModBlocks {
         AbstractBlock.Settings blockSettings = blockSettingUnion.getBlockSettings();
         Item.Settings itemSettings = blockSettingUnion.getItemSettings();
         Block block = new Block(blockSettings);
+        registerBlockItem(block, itemSettings, itemGroups);
+        return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
+    }
+
+    /**
+     * 注册自定义的Block  传入两个设置(封装在内部类中) 勿动
+     *
+     * @param blockClass        自定义Block的类型
+     * @param blockSettingUnion 内部类对象 包含两个设置
+     * @param itemGroups        要加入的组
+     * @return 返回添加的Block
+     */
+    @SafeVarargs
+    private static Block registerCustomBlock(Class blockClass, BlockSettingUnion blockSettingUnion, RegistryKey<ItemGroup>... itemGroups) {
+        AbstractBlock.Settings blockSettings = blockSettingUnion.getBlockSettings();
+        Item.Settings itemSettings = blockSettingUnion.getItemSettings();
+        Block block;
+        try {
+            //用反射创建自定义方块类的运行时对象
+            block = (Block) blockClass.getConstructor(AbstractBlock.Settings.class).newInstance(blockSettings);
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
         registerBlockItem(block, itemSettings, itemGroups);
         return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
     }
