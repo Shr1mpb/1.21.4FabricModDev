@@ -1,0 +1,17 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "building",
+  "key": {
+    "#": "shr1mpfmod:first_block",
+    "X": "shr1mpfmod:starlight_ashes"
+  },
+  "pattern": [
+    "###",
+    "#X#",
+    "###"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shr1mpfmod:magic_block"
+  }
+}
