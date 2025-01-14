@@ -4,7 +4,7 @@
 
 这里是Shr1mp的MineCraft Fabric模组开发学习
 
-如果你看完了这篇README，那么你也可以入门Minecraft的Fabric模组开发(1.21.2+)。方法就是观看这位博主在Youtube上的视频(因为那个视频只适用于1.21.2-,很多方法都无法正常使用了)，并来我这里查看我封装好的方法。或者你也可以自己封装自己的方法，或者使用原生的Fabric API。
+如果你看完了这篇README，那么你也可以入门Minecraft的Fabric模组开发(1.21.2+)的简单功能，我相信这些功能足以帮你实现类似 Bilibili 上的 "你说我做" 系列节目。方法就是观看这位博主在Youtube上的视频(因为那个视频只适用于1.21.2-,很多方法都无法正常使用了)，并来我这里查看我封装好的方法。或者你也可以自己封装自己的方法，或者使用原生的Fabric API。
 我个人还是感觉把原生的方法都封装一下，编程体验会大大提高，也会巩固一些编程语言知识，提高代码水平。
 
 **这里我用的版本为Java 1.21.4**
@@ -57,13 +57,18 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * **自定义食物药效**：注意：食物添加药水效果的方法与1.21.2-有所不同，需要先创建普通的FoodComponent，然后去同目录下的`ModConsumableComponents`中创建药水效果，最后在ModItems注册时加入药水效果，这里已经封装到了ModItems的`registerCustomFood()`方法中。可以参考CAULIFLOWER的创建。
 
 
-* **注册燃料/堆肥物品**：注册一个新的物品后，在`src/main/java/com/shr1mpfzh/fmod/item/ModItems`下的`registerFuels()`方法的lambda表达式中添加即可;堆肥物品类似，在`registerCompostingChance()`方法中。。
+* **注册燃料/堆肥物品**：注册一个新的物品后，在`src/main/java/com/shr1mpfzh/fmod/item/ModItems`下的`registerFuels()`方法的lambda表达式中添加即可;堆肥物品类似，在`registerCompostingChance()`方法中。
 
 
-* **设置物品发光和物品稀有度**：在`createDefaultItemSettings()`方法后使用`.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)`;同理，使用`.rarity(Rarity.XXX)`可以设置物品稀有度(会影响物品名字的颜色)
+* **设置物品发光和物品稀有度**：在`createDefaultItemSettings()`方法后使用`.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)`;同理，使用`.rarity(Rarity.XXX)`可以设置物品稀有度(会影响物品名字的颜色)。
 
 
-* **设置物品提示**：参考`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`中的`appendToolTip()`。方法就是写一个物品类的子类，并且重写其appendToolTip()方法。
+* **设置物品提示**：参考`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`中的`appendToolTip()`。方法就是写一个物品类的子类，并且重写其appendToolTip()方法。此外，还可以添加`if(Screen.hasShiftDown())`判断来动态添加提示内容。
+
+
+* **关于自定义标签**：这里没有做自定义标签的相关内容。自定义标签的作用是，能把特定的物品配置到 json 文件中，然后在代码中用一行就可以从文件中检索，比起配置到java类中要清爽很多。感兴趣可以看一下原视频的 [第10集 CustomTags](https://www.youtube.com/watch?v=lVpV3B3yFsg) 。
+
+
 
 
 ---
