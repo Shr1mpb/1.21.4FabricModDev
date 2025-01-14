@@ -41,11 +41,16 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在`resource/data/tags/block/mineable`的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在`resource/data/【modid】/loot_table/blocks`中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
 
 
-* **自定义物品(创造超脱原版的特定功能的新物品)**：参照`src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem`类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的registerCustomItem()方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
+* **自定义物品(创造超脱原版的特定功能的新物品)**：参照`src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem`类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的`registerCustomItem()`方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
  Item类也有很多子类，有原版中实现各种各样功能的类供你参考。选中Item，使用Ctrl+H即可查看(IDEA中)。
 
 
-* **自定义方块**：_与自定义物品相似_，参照`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`，然后再将它通过registerCustomBlock()方法注册到游戏中。
+* **自定义方块**：_与自定义物品相似_，参照`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`，然后再将它通过`registerCustomBlock()`方法注册到游戏中。
+
+
+* **自定义食物**：参考`src/main/java/com/shr1mpfzh/fmod/item/ModFoodComponents`中我封装的方法与创建的`CAULIFLOWER`属性，创建完成之后要去ModItems中使用`registerCustomFood()`注册即可，注册时留空药效相关的属性。
+
+* **自定义食物药效**：注意：食物添加药水效果的方法与1.21.2-有所不同，需要先创建普通的FoodComponent，然后去同目录下的`ModConsumableComponents`中创建药水效果，最后在ModItems注册时加入药水效果，这里已经封装到了ModItems的`registerCustomFood()`方法中。可以参考CAULIFLOWER的创建。
 
 
 ---

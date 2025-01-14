@@ -3,13 +3,20 @@ package com.shr1mp4zh.fmod.item;
 import com.shr1mp4zh.fmod.Shr1mpfmod;
 import com.shr1mp4zh.fmod.item.custom.ChiselItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.minecraft.component.DataComponentTypes;
+import net.minecraft.component.type.ConsumableComponent;
+import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemGroups;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
+import org.jetbrains.annotations.Nullable;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.util.Objects;
 
 public class ModItems {
 
@@ -24,7 +31,8 @@ public class ModItems {
     public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
     //注册一个自定义物品 这里就没有加入任何物品组，只在ModItemGroups里加入了自定义的物品组
     public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(ChiselItem.MAX_DAMAGE));
-
+    //注册一个自定义食物
+    public static final Item CAULIFLOWER = registerCustomFood(createDefaultItemSettings("cauliflower").rarity(Rarity.EPIC).maxCount(16), null, ModFoodComponents.CAULIFLOWER, ModConsumableComponents.CAULIFLOWER);
 
 
 
@@ -70,6 +78,43 @@ public class ModItems {
             throw new RuntimeException(e);
         }
         Item registeredItem = Registry.register(Registries.ITEM, identifier, customItem);
+        for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
+            ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
+        }
+        return registeredItem;
+    }
+
+
+    /**
+     * 用于快速创建一个食物类型 如果没有药水效果可以留空关于药水的特性
+     *
+     * @param settings        注册的物品的属性 通过下面的createDefaultItemSettings创建 需要传入id
+     * @param customItemClass 如果没有则留空 如果有(例如是药水时会用到其他的Item类或重写Item类的方法)则传入
+     * @param foodComponent 创建的FoodComponent 在ModFoodComponent类中 用于填写食物的相关属性
+     * @param consumableComponent 加入药水效果的ConsumableComponent 在ModConsumableComponents类中 用于填写消耗物的药效等
+     * @param itemGroups      要加入的物品组
+     * @return 返回Item类对象
+     */
+    @SafeVarargs
+    private static Item registerCustomFood(Item.Settings settings, Class customItemClass, FoodComponent foodComponent, @Nullable ConsumableComponent consumableComponent, RegistryKey<ItemGroup>... itemGroups) {
+        Identifier identifier = settings.getModelId();
+        Item customFood;
+        try {
+            //根据是否传入customItem确定使用的构造器(创建的运行时类)
+            Constructor constructor = Objects.requireNonNullElse(customItemClass, Item.class).getConstructor(Item.Settings.class);
+
+            if (consumableComponent == null) {
+                customFood = (Item) constructor.newInstance(settings.food(foodComponent));
+            }else{
+                customFood = (Item) constructor.newInstance(settings.food(foodComponent, consumableComponent).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
+            }
+
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
+                 IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+
+        Item registeredItem = Registry.register(Registries.ITEM, identifier, customFood);
         for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
             ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
         }

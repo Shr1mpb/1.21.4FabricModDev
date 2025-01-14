@@ -1,8 +1,9 @@
 {
-  "item.shr1mpfmod.first_item": "FirstItem",
-  "item.shr1mpfmod.first_block": "FirstBlock",
-  "item.shr1mpfmod.second_block": "SecondBlock",
-  "itemgroups.shr1mpfmod.first_item_group": "FirstItemGroup",
+  "item.shr1mpfmod.first_item": "heaven gem",
+  "item.shr1mpfmod.first_block": "heaven gem block",
+  "item.shr1mpfmod.second_block": "heaven gem ore",
+  "itemgroups.shr1mpfmod.first_item_group": "Treasure from the Heaven",
   "item.shr1mpfmod.chisel": "chisel",
-  "item.shr1mpfmod.magic_block": "magic block"
+  "item.shr1mpfmod.magic_block": "magic block",
+  "item.shr1mpfmod.cauliflower": "cecilia flower"
 }
