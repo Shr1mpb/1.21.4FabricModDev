@@ -4,7 +4,8 @@
 
 这里是Shr1mp的MineCraft Fabric模组开发学习
 
-如果你看完了这篇README，那么你也可以入门Minecraft的Fabric模组开发(1.21.2+)。方法就是观看这位博主在Youtube上的视频(因为那个视频只适用于1.21.2-，不过大多数的功能还是可以正常使用的)，并来我这里查看我封装好的方法。或者你也可以自己封装。
+如果你看完了这篇README，那么你也可以入门Minecraft的Fabric模组开发(1.21.2+)。方法就是观看这位博主在Youtube上的视频(因为那个视频只适用于1.21.2-,很多方法都无法正常使用了)，并来我这里查看我封装好的方法。或者你也可以自己封装自己的方法，或者使用原生的Fabric API。
+我个人还是感觉把原生的方法都封装一下，编程体验会大大提高，也会巩固一些编程语言知识，提高代码水平。
 
 **这里我用的版本为Java 1.21.4**
 
@@ -21,12 +22,15 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * 看到网上很多模组教学都是之前的，1.21.4的Fabric API发生了较大的变化，之前的注册物品和方块的功能可能都需要被改进，即便是在Fabric Wiki上也有没有的信息，需要自己挖掘。
 * 我这边跟着Youtube博主[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe) 学习，并**自己封装**了很多新版本的Fabric API的方法，让我能**快速的注册物品、注册方块或修改对应的属性等等。**
 * 我的仓库这几天会持续更新，跟着旧版本的教学走一次，如果无法成功，我会找解决方法，之后封装好我的函数。**每个类或函数的用法我已经写在了对应的java类中。**
-* 相应的，如果要添加材质或进行其他操作，请选定first_xxx然后参照assets中的文件。
+
 
 ## Tips/食用方法/简易教程：
 
-无论如何，我都建议你去查看这位博主的视频[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe)。在遇到不生效的情况时，可以来这里查找解决方案，或者使用我封装好的方法。
+无论如何，我都建议你去查看这位博主的视频[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe)，有初中的英文水平就能看懂，他的视频长达11小时，涵盖面广，教学详细。
 
+在遇到不生效的情况时，可以来这里查找解决方案，或者使用我封装好的方法。你也可以去Fabric开发者的社区、论坛或是[Fabric Wiki](https://wiki.fabricmc.net/start)寻找解决方法。
+
+开发指引/本仓库使用方法 
 ---
 * **多使用External Libraries。**
 对于`resource/data/【modid】/recipe`中的配方，包括合成、冶炼等，你可以在`External Libraries`中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
@@ -57,6 +61,10 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 
 * **设置物品发光和物品稀有度**：在`createDefaultItemSettings()`方法后使用`.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)`;同理，使用`.rarity(Rarity.XXX)`可以设置物品稀有度(会影响物品名字的颜色)
+
+
+* **设置物品提示**：参考`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`中的`appendToolTip()`。方法就是写一个物品类的子类，并且重写其appendToolTip()方法。
+
 
 ---
 

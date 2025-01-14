@@ -6,5 +6,6 @@
   "item.shr1mpfmod.chisel": "chisel",
   "item.shr1mpfmod.magic_block": "magic block",
   "item.shr1mpfmod.cauliflower": "cecilia flower",
-  "item.shr1mpfmod.starlight_ashes": "starlight ashes"
+  "item.shr1mpfmod.starlight_ashes": "starlight ashes",
+  "tooltip.shr1mpfmod.magic_block.tooltip": "§6Contains the mysterious power of repair and transformation§r"
 }

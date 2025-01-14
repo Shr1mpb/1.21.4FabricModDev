@@ -32,7 +32,7 @@ public class ModItems {
     //注册第一个物品 像这里既加入了原料物品组 又在ModItemGroups类中加入了自定义的物品组里
     public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
     //注册一个自定义物品 这里就没有加入任何物品组，只在ModItemGroups里加入了自定义的物品组
-    public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(ChiselItem.MAX_DAMAGE));
+    public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(ChiselItem.MAX_DAMAGE).rarity(Rarity.RARE));
     //注册一个自定义食物 塞西莉亚花(有药效,并且设置了稀有度为Rarity.EPIC，堆叠数量最大16)
     public static final Item CAULIFLOWER = registerCustomFood(createDefaultItemSettings("cauliflower").rarity(Rarity.EPIC).maxCount(16), null, ModFoodComponents.CAULIFLOWER, ModConsumableComponents.CAULIFLOWER,true);
     //注册自定义燃料+堆肥 并设置最大堆叠数量为16 稀有度 并设置发光 设置燃料和堆肥的方法在本类中的最下方

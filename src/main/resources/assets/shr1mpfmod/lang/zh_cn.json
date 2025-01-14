@@ -6,5 +6,6 @@
   "item.shr1mpfmod.chisel": "魔法凿子",
   "item.shr1mpfmod.magic_block": "魔法方块",
   "item.shr1mpfmod.cauliflower": "塞西莉亚花",
-  "item.shr1mpfmod.starlight_ashes": "星之灰烬"
+  "item.shr1mpfmod.starlight_ashes": "星之灰烬",
+  "tooltip.shr1mpfmod.magic_block.tooltip": "§6蕴含修复和转化的神秘力量§r"
 }

@@ -55,9 +55,10 @@ public class ChiselItem extends Item {
                 world.playSound(null, context.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS);
 
             }
+            //成功并且能够显示右击的动画
+            return ActionResult.SUCCESS;
         }
+        return ActionResult.FAIL;
 
-        //成功并且能够显示右击的动画
-        return ActionResult.SUCCESS;
     }
 }

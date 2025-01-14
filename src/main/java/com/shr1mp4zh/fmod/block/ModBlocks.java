@@ -18,6 +18,7 @@ import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.sound.BlockSoundGroup;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.Rarity;
 import net.minecraft.util.math.intprovider.UniformIntProvider;
 
 import java.lang.reflect.InvocationTargetException;
@@ -47,7 +48,7 @@ public class ModBlocks {
         SECOND_BLOCK = registerExperienceBlock(secondBlockSetting, 10, 12, ItemGroups.NATURAL);
 
         BlockSettingUnion magicBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("magic_block", false);
-        magicBlockSetting.getItemSettings().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);//发光
+        magicBlockSetting.getItemSettings().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true).rarity(Rarity.UNCOMMON);//发光
         MAGIC_BLOCK = registerCustomBlock(MagicBlock.class, magicBlockSetting);
     }
 
