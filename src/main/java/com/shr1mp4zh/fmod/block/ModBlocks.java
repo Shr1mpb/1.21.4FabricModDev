@@ -7,6 +7,7 @@ import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.block.AbstractBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -46,6 +47,7 @@ public class ModBlocks {
         SECOND_BLOCK = registerExperienceBlock(secondBlockSetting, 10, 12, ItemGroups.NATURAL);
 
         BlockSettingUnion magicBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("magic_block", false);
+        magicBlockSetting.getItemSettings().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true);//发光
         MAGIC_BLOCK = registerCustomBlock(MagicBlock.class, magicBlockSetting);
     }
 

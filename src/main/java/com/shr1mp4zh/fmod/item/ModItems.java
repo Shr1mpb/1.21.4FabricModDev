@@ -3,6 +3,8 @@ package com.shr1mp4zh.fmod.item;
 import com.shr1mp4zh.fmod.Shr1mpfmod;
 import com.shr1mp4zh.fmod.item.custom.ChiselItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
+import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
+import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
@@ -31,9 +33,10 @@ public class ModItems {
     public static final Item FIRST_ITEM = registerItem(createDefaultItemSettings("first_item"), ItemGroups.INGREDIENTS);
     //注册一个自定义物品 这里就没有加入任何物品组，只在ModItemGroups里加入了自定义的物品组
     public static final Item CHISEL = registerCustomItem(ChiselItem.class, createDefaultItemSettings("chisel").maxDamage(ChiselItem.MAX_DAMAGE));
-    //注册一个自定义食物
-    public static final Item CAULIFLOWER = registerCustomFood(createDefaultItemSettings("cauliflower").rarity(Rarity.EPIC).maxCount(16), null, ModFoodComponents.CAULIFLOWER, ModConsumableComponents.CAULIFLOWER);
-
+    //注册一个自定义食物 塞西莉亚花(有药效,并且设置了稀有度为Rarity.EPIC，堆叠数量最大16)
+    public static final Item CAULIFLOWER = registerCustomFood(createDefaultItemSettings("cauliflower").rarity(Rarity.EPIC).maxCount(16), null, ModFoodComponents.CAULIFLOWER, ModConsumableComponents.CAULIFLOWER,true);
+    //注册自定义燃料+堆肥 并设置最大堆叠数量为16 稀有度 并设置发光 设置燃料和堆肥的方法在本类中的最下方
+    public static final Item STARLIGHT_ASHES = registerItem(createDefaultItemSettings("starlight_ashes").maxCount(16).rarity(Rarity.UNCOMMON).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
 
 
     //下面都是封装好的方法 勿动
@@ -41,9 +44,12 @@ public class ModItems {
      * “入口”方法 勿动
      * 用于被 Shr1mpfmod 中的 onInitialize() 调用的方法 导致这个类被加载(这里是JVM的相关机制了 普通人不需要了解太深)
      * 加载的过程有 1.加载 2.链接(验证+准备+解析) 3.初始化
+     * 这里初始化就已经注册了其他物品 注册燃料物品和堆肥物品时单独调用一个方法 放在下方
      */
     public static void initialize() {
-        Shr1mpfmod.LOGGER.debug("Registering mod items for" + Shr1mpfmod.MOD_ID);
+        Shr1mpfmod.LOGGER.debug("Registering mod items and fuels for" + Shr1mpfmod.MOD_ID);
+        registerFuels();
+        registerCompostingItems();
     }
     /**
      * 注册物品的方法 勿动
@@ -96,7 +102,7 @@ public class ModItems {
      * @return 返回Item类对象
      */
     @SafeVarargs
-    private static Item registerCustomFood(Item.Settings settings, Class customItemClass, FoodComponent foodComponent, @Nullable ConsumableComponent consumableComponent, RegistryKey<ItemGroup>... itemGroups) {
+    private static Item registerCustomFood(Item.Settings settings, Class customItemClass, FoodComponent foodComponent, @Nullable ConsumableComponent consumableComponent,boolean glow, RegistryKey<ItemGroup>... itemGroups) {
         Identifier identifier = settings.getModelId();
         Item customFood;
         try {
@@ -106,7 +112,12 @@ public class ModItems {
             if (consumableComponent == null) {
                 customFood = (Item) constructor.newInstance(settings.food(foodComponent));
             }else{
-                customFood = (Item) constructor.newInstance(settings.food(foodComponent, consumableComponent).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
+                if (glow){
+                    customFood = (Item) constructor.newInstance(settings.food(foodComponent, consumableComponent).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
+                }else {
+                    customFood = (Item) constructor.newInstance(settings.food(foodComponent, consumableComponent));
+                }
+
             }
 
         } catch (NoSuchMethodException | InvocationTargetException | InstantiationException |
@@ -131,5 +142,21 @@ public class ModItems {
         return new Item.Settings().registryKey(RegistryKey.of(RegistryKeys.ITEM,identifier));
     }
 
+    /**
+     * 注册燃料物品 把要注册的物品写在下面的lambda即可
+     */
+    public static void registerFuels() {
+        FuelRegistryEvents.BUILD.register((builder, context) -> {
+            // 可以一次在这个 lambda 中添加多个物品。 value的值是燃烧时间 单位是tick 经测试最大为烧制105个
+            builder.add(STARLIGHT_ASHES, 200 * 100);
+        });
+    }
 
+    /**
+     * 注册堆肥物品 把要注册的物品写在下面的lambda即可
+     */
+    public static void registerCompostingItems() {
+        // 这里仿照这个语句写 来注册可堆肥的物品 后面的Float类型是堆肥概率
+        CompostingChanceRegistry.INSTANCE.add(STARLIGHT_ASHES, 1F);
+    }
 }

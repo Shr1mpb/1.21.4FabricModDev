@@ -18,7 +18,7 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 ## 初衷：
 
-* 看到网上很多模组教学都是之前的，1.21.4的Fabric API发生了较大的变化，之前的注册物品和方块的功能可能都需要被改进。
+* 看到网上很多模组教学都是之前的，1.21.4的Fabric API发生了较大的变化，之前的注册物品和方块的功能可能都需要被改进，即便是在Fabric Wiki上也有没有的信息，需要自己挖掘。
 * 我这边跟着Youtube博主[Modding by Kaupenjoe](https://www.youtube.com/@ModdingByKaupenjoe) 学习，并**自己封装**了很多新版本的Fabric API的方法，让我能**快速的注册物品、注册方块或修改对应的属性等等。**
 * 我的仓库这几天会持续更新，跟着旧版本的教学走一次，如果无法成功，我会找解决方法，之后封装好我的函数。**每个类或函数的用法我已经写在了对应的java类中。**
 * 相应的，如果要添加材质或进行其他操作，请选定first_xxx然后参照assets中的文件。
@@ -52,6 +52,11 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 * **自定义食物药效**：注意：食物添加药水效果的方法与1.21.2-有所不同，需要先创建普通的FoodComponent，然后去同目录下的`ModConsumableComponents`中创建药水效果，最后在ModItems注册时加入药水效果，这里已经封装到了ModItems的`registerCustomFood()`方法中。可以参考CAULIFLOWER的创建。
 
+
+* **注册燃料/堆肥物品**：注册一个新的物品后，在`src/main/java/com/shr1mpfzh/fmod/item/ModItems`下的`registerFuels()`方法的lambda表达式中添加即可;堆肥物品类似，在`registerCompostingChance()`方法中。。
+
+
+* **设置物品发光和物品稀有度**：在`createDefaultItemSettings()`方法后使用`.component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)`;同理，使用`.rarity(Rarity.XXX)`可以设置物品稀有度(会影响物品名字的颜色)
 
 ---
 

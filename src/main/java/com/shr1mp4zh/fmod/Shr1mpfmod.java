@@ -27,4 +27,6 @@ public class Shr1mpfmod implements ModInitializer {
 		ModBlocks.initialize();
 		ModItemGroups.initialize();
 	}
+
+
 }

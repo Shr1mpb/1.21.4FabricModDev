@@ -1,6 +1,5 @@
 package com.shr1mp4zh.fmod.item.custom;
 
-import com.shr1mp4zh.fmod.block.ModBlocks;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.EquipmentSlot;
@@ -25,14 +24,12 @@ public class ChiselItem extends Item {
     public static final int MAX_DAMAGE = 50;
     private static final Map<Block, Block> CHISEL_MAP =
             Map.of(
-                    Blocks.STONE, Blocks.STONE_BRICKS,
-                    Blocks.END_STONE, Blocks.END_STONE_BRICKS,
-                    Blocks.OAK_LOG, ModBlocks.FIRST_BLOCK,
+                    Blocks.STONE, Blocks.SMOOTH_STONE,
+                    Blocks.END_STONE, Blocks.PURPUR_BLOCK,
                     Blocks.GOLD_BLOCK, Blocks.NETHERITE_BLOCK,
 
-                    Blocks.STONE_BRICKS, Blocks.STONE,
-                    Blocks.END_STONE_BRICKS, Blocks.END_STONE,
-                    ModBlocks.FIRST_BLOCK, Blocks.OAK_LOG,
+                    Blocks.SMOOTH_STONE, Blocks.STONE,
+                    Blocks.PURPUR_BLOCK, Blocks.END_STONE,
                     Blocks.NETHERITE_BLOCK, Blocks.GOLD_BLOCK
                     );
 
