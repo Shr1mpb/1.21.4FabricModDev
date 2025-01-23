@@ -15,6 +15,9 @@
 	"icon": "assets/shr1mpfmod/icon.png",
 	"environment": "*",
 	"entrypoints": {
+		"fabric-datagen": [
+			"com.shr1mp4zh.fmod.Shr1mpfmodDataGeneratorClient"
+		],
 		"main": [
 			"com.shr1mp4zh.fmod.Shr1mpfmod"
 		],

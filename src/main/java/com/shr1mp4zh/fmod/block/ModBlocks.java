@@ -4,9 +4,7 @@ import com.shr1mp4zh.fmod.Shr1mpfmod;
 import com.shr1mp4zh.fmod.block.custom.MagicBlock;
 import com.shr1mp4zh.fmod.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
-import net.minecraft.block.AbstractBlock;
-import net.minecraft.block.Block;
-import net.minecraft.block.ExperienceDroppingBlock;
+import net.minecraft.block.*;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
@@ -38,6 +36,11 @@ public class ModBlocks {
     public static final Block FIRST_BLOCK;
     public static final Block SECOND_BLOCK;
     public static final Block MAGIC_BLOCK;
+    public static final Block FIRST_STAIR;
+    public static final Block FIRST_SLAB;
+    public static final Block FIRST_BUTTON;
+    public static final Block FIRST_FENCE;
+    public static final Block FIRST_WALL;
     static{
         BlockSettingUnion firstBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("first_block",true);
         firstBlockSetting.getBlockSettings().strength(6f);
@@ -50,6 +53,13 @@ public class ModBlocks {
         BlockSettingUnion magicBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("magic_block", false);
         magicBlockSetting.getItemSettings().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true).rarity(Rarity.UNCOMMON);//发光
         MAGIC_BLOCK = registerCustomBlock(MagicBlock.class, magicBlockSetting);
+
+        FIRST_STAIR = registerNonBlockBlock(StairsBlock.class, ModBlocks.FIRST_BLOCK,null,null, BlockSettingUnion.createDefaultBlockSettingUnion("first_stair", true), ItemGroups.BUILDING_BLOCKS);
+        FIRST_SLAB = registerNonBlockBlock(SlabBlock.class, ModBlocks.FIRST_BLOCK, null, null, BlockSettingUnion.createDefaultBlockSettingUnion("first_slab", true), ItemGroups.BUILDING_BLOCKS);
+        FIRST_BUTTON = registerNonBlockBlock(ButtonBlock.class, ModBlocks.FIRST_BLOCK,BlockSetType.STONE,20, BlockSettingUnion.createDefaultBlockSettingUnion("first_button", true), ItemGroups.BUILDING_BLOCKS);
+        FIRST_FENCE = registerNonBlockBlock(FenceBlock.class, ModBlocks.FIRST_BLOCK, null, null, BlockSettingUnion.createDefaultBlockSettingUnion("first_fence", true), ItemGroups.BUILDING_BLOCKS);
+        FIRST_WALL = registerNonBlockBlock(WallBlock.class, ModBlocks.FIRST_BLOCK, null, null, BlockSettingUnion.createDefaultBlockSettingUnion("first_wall", true), ItemGroups.BUILDING_BLOCKS);
+
     }
 
 
@@ -109,6 +119,37 @@ public class ModBlocks {
         return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
     }
 
+
+    /**
+     * 注册自定义的Block  这里传入
+     *
+     * @param blockClass        自定义Block的类型
+     * @param baseBlock         基准方块 使用stair的时候用
+     * @param blockSettingUnion 内部类对象 包含两个设置
+     * @param itemGroups        要加入的组
+     * @return 返回添加的Block
+     */
+    @SafeVarargs
+    private static Block registerNonBlockBlock(Class blockClass,Block baseBlock, BlockSetType blockSetType,Integer pressTicks,BlockSettingUnion blockSettingUnion, RegistryKey<ItemGroup>... itemGroups) {
+        AbstractBlock.Settings blockSettings = blockSettingUnion.getBlockSettings();
+        Item.Settings itemSettings = blockSettingUnion.getItemSettings();
+        Block block;
+        try {
+            //用反射创建自定义方块类的运行时对象
+            if (blockClass == StairsBlock.class) {
+                block = (Block) blockClass.getConstructor(BlockState.class, AbstractBlock.Settings.class).newInstance(baseBlock.getDefaultState(), blockSettings);
+            } else if (blockClass == ButtonBlock.class){
+                block = (Block) blockClass.getConstructor(BlockSetType.class, int.class,AbstractBlock.Settings.class).newInstance(blockSetType,pressTicks,blockSettings);
+            }else{
+                block = (Block) blockClass.getConstructor(AbstractBlock.Settings.class).newInstance(blockSettings);
+            }
+
+        }  catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        registerBlockItem(block, itemSettings, itemGroups);
+        return Registry.register(Registries.BLOCK, itemSettings.getModelId(), block);
+    }
 
     /**
      * 创建默认的方块设置 在调用BlockSettingUnion.createDefaultBlockSettingUnion()时被创建 封装在BlockSettingUnion对象中

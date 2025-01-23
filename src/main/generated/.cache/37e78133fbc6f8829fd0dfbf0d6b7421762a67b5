@@ -1,0 +1,8 @@
+// 1.21.4	-999999999-01-01T00:00:00	shr1mpfmod/Tags for minecraft:block
+98d1a0254f5ee0e59ae10c829fa72bbf830b88f1 data/minecraft/tags/block/buttons.json
+f53fd5b481f75e2927e675802597abe9ba7a1e63 data/minecraft/tags/block/fences.json
+3875b0301aabbde847488045903ea99dfe62e0bd data/minecraft/tags/block/mineable/pickaxe.json
+765b95de0300789e7f2c4432466112bb10e4b016 data/minecraft/tags/block/needs_diamond_tool.json
+9ecdb88a2e442999348d50746e502f6c06f624c9 data/minecraft/tags/block/slabs.json
+4d5524a8b1443b6156fa1036dc7f78deac44a76e data/minecraft/tags/block/stairs.json
+4dc396884ad4115c2c77ec5d5680ca7368205d10 data/minecraft/tags/block/walls.json

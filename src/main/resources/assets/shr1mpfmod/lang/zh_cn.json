@@ -8,5 +8,10 @@
   "item.shr1mpfmod.cauliflower": "塞西莉亚花",
   "item.shr1mpfmod.starlight_ashes": "星之灰烬",
   "tooltip.shr1mpfmod.magic_block.tooltip": "§6蕴含修复和转化的神秘力量§r",
-  "tooltip.shr1mpfmod.chisel.tooltip": "§6建筑师用品，可以转化三界之物§r"
+  "tooltip.shr1mpfmod.chisel.tooltip": "§6建筑师用品，可以转化三界之物§r",
+  "item.shr1mpfmod.first_stair": "天外宝石楼梯",
+  "item.shr1mpfmod.first_slab": "天外宝石半砖",
+  "item.shr1mpfmod.first_button": "天外宝石按钮",
+  "item.shr1mpfmod.first_fence": "天外宝石栅栏",
+  "item.shr1mpfmod.first_wall": "天外宝石围墙"
 }

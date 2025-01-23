@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients":[
+    "shr1mpfmod:first_item"
+  ],
+  "result": {
+    "count": 1,
+    "id": "shr1mpfmod:first_button"
+  }
+}

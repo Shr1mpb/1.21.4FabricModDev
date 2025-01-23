@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "type=bottom": {
+      "model": "shr1mpfmod:block/first_slab"
+    },
+    "type=double": {
+      "model": "shr1mpfmod:block/first_block"
+    },
+    "type=top": {
+      "model": "shr1mpfmod:block/first_slab_top"
+    }
+  }
+}

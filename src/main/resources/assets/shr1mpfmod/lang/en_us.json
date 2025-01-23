@@ -8,5 +8,10 @@
   "item.shr1mpfmod.cauliflower": "cecilia flower",
   "item.shr1mpfmod.starlight_ashes": "starlight ashes",
   "tooltip.shr1mpfmod.magic_block.tooltip": "§6Contains the mysterious power of repair and transformation§r",
-  "tooltip.shr1mpfmod.chisel.tooltip": "§6Architect's supplies that can transform things in the three realms§r"
+  "tooltip.shr1mpfmod.chisel.tooltip": "§6Architect's supplies that can transform things in the three realms§r",
+  "item.shr1mpfmod.first_stair": "heaven gem stair",
+  "item.shr1mpfmod.first_slab": "heaven gem slap",
+  "item.shr1mpfmod.first_button": "heaven gem button",
+  "item.shr1mpfmod.first_fence": "heaven gem fence",
+  "item.shr1mpfmod.first_wall": "heaven gem wall"
 }

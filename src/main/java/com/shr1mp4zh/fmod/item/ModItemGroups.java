@@ -26,6 +26,12 @@ public class ModItemGroups {
         firstItemList.add(ModBlocks.MAGIC_BLOCK);
         firstItemList.add(ModItems.CAULIFLOWER);
         firstItemList.add(ModItems.STARLIGHT_ASHES);
+        firstItemList.add(ModBlocks.FIRST_STAIR);
+        firstItemList.add(ModBlocks.FIRST_SLAB);
+        firstItemList.add(ModBlocks.FIRST_BUTTON);
+        firstItemList.add(ModBlocks.FIRST_FENCE);
+        firstItemList.add(ModBlocks.FIRST_WALL);
+
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }
 

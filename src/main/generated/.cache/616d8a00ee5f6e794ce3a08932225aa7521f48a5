@@ -1,0 +1,6 @@
+// 1.21.4	-999999999-01-01T00:00:00	shr1mpfmod/Block Loot Tables
+d47e5dfef0c629ff6c609f30927caa171a8764fd data/shr1mpfmod/loot_table/blocks/first_button.json
+9cf6d781bd352484ee3550974f2bb19e010205c8 data/shr1mpfmod/loot_table/blocks/first_fence.json
+ff8f1504ecd86c9988e73aa61010e0571a5625de data/shr1mpfmod/loot_table/blocks/first_slab.json
+1dfd50dcd2e1039643e0d68980b07877bd80a0a5 data/shr1mpfmod/loot_table/blocks/first_stair.json
+7a91a8546290d4dee7f0bc9d478b42aca2805e0a data/shr1mpfmod/loot_table/blocks/first_wall.json

@@ -32,25 +32,31 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 开发指引/本仓库使用方法 
 ---
-* **多使用External Libraries。**
-对于`resource/data/【modid】/recipe`中的配方，包括合成、冶炼等，你可以在`External Libraries`中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
+学习时，本仓库也是渐进的。release里有没有使用datagen功能时的代码可以用作参考。你现在看到的仓库中的代码都是全新的。
 
-
-* `resource/assets/【modid】`中是添加**材质和模型**的地方。就Item举例而言，三层结构：items -> models -> textures，仿照书写即可
+* **创建仓库**：去Fabric API官网使用生成器。需要注意的是，如果你要使用datagen的功能，需要把相关选项打勾。
 
 
 * **提交记录**中的Init就是有对API进行封装的提交，Perf或者Fix就是对这些东西的改进或修复
 
 
-* 要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步。首先需要在`resource/data/tags/block/mineable`的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在`resource/data/【modid】/loot_table/blocks`中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
+* `resource/assets/【modid】`中是添加**材质和模型**的地方。就Item举例而言，三层结构：items -> models -> textures，仿照书写即可。对于方块，则是blockstates -> models -> textures。使用datagen功能以后，前两层都不需要了，fabric会自己生成对应的json文件。
 
 
 * **自定义物品(创造超脱原版的特定功能的新物品)**：参照`src/main/java/com/shr1mp4zh/fmod/item/custom/ChiselItem`类，在这个类上有一定的注释说明;然后，去到ModItems里用我封装的`registerCustomItem()`方法注册这个物品。原理是重写原版的Item类，它可以帮助你实现很多新的功能，或者实现你从小就想实现的梦想。
  Item类也有很多子类，有原版中实现各种各样功能的类供你参考。选中Item，使用Ctrl+H即可查看(IDEA中)。
 
 
+* **自定义合成配方** ：
+  对于`resource/data/【modid】/recipe`中的配方，包括合成、冶炼等，你可以在`External Libraries`中找到原版Minecraft中的一些配方，仿照他们，就能得到很不错的结果。例如对于九个Slot都一样的配方(例如合成xxx块)，在新版本中和旧版本不一样，需要仔细甄别。我也强烈建议你多使用这种方法查找解决方法，或者达成自己想要的目标(当然是你得对原版物品的机制熟悉，haha)
+
+
 * **自定义方块**：_与自定义物品相似_，参照`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`，然后再将它通过`registerCustomBlock()`方法注册到游戏中。
 
+要让创建的方块被**破坏后有掉落物**或**设置开采等级**，至少需要两步，下面是具体步骤。
+
+>1. 未使用datagen：首先需要在`resource/data/tags/block/mineable`的对应的工具中添加相应的方块，如果要设置开采等级，需要在上一级的needs_XXX_tool中添加；然后，在`resource/data/【modid】/loot_table/blocks`中添加json文件定义其掉落的物品(掉落自己本身的方块的json文件都长得差不多，参照此文件夹中的first_block.json即可；对于矿石类型的方块，还有附魔、掉落物配置之类，相对复杂，参考second_block.json)。
+>2. 使用了datagen：在ModBlockTagProvider中添加对应的mineable或者needsXXX标签，然后在ModLootTableProvider中配置掉落物。仿照书写即可。
 
 * **自定义食物**：参考`src/main/java/com/shr1mpfzh/fmod/item/ModFoodComponents`中我封装的方法与创建的`CAULIFLOWER`属性，创建完成之后要去ModItems中使用`registerCustomFood()`注册即可，注册时留空药效相关的属性。
 
@@ -66,10 +72,14 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * **设置物品提示**：参考`src/main/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`中的`appendToolTip()`。方法就是写一个物品类的子类，并且重写其appendToolTip()方法。此外，还可以添加`if(Screen.hasShiftDown())`判断来动态添加提示内容。
 
 
-* **关于自定义标签**：这里没有做自定义标签的相关内容。自定义标签的作用是，能把特定的物品配置到 json 文件中，然后在代码中用一行就可以从文件中检索，比起配置到java类中要清爽很多。感兴趣可以看一下原视频的 [第10集 CustomTags](https://www.youtube.com/watch?v=lVpV3B3yFsg) 。
+* **关于自定义标签(CustomTags)**：这里没有做自定义标签的相关内容。自定义标签的作用是，能把特定的物品配置到 json 文件中，然后在代码中用一行就可以从文件中检索，比起配置到java类中要清爽很多。感兴趣可以看一下原视频的 [第10集 CustomTags](https://www.youtube.com/watch?v=lVpV3B3yFsg) 。
 
 
+* **关于数据生成(DataGeneration)**：数据生成的用法就是在`java/com/shr1mp4zh/fmod/datagen`中。开发简化了很多步骤，但是还有小部分使用json来配置。作用是：使用新的数据生成类，可以允许你不写很多的json文件(例如，`resources`文件夹下的`assets/shr1mpfmod/blockstates&items&models`、`data/shr1mpfmod/loot_table&recipe`,还有`mineable`文件夹中配置的可以采掘的工具)，只留下textures就能把物品的模型渲染，并且可以在程序里配置配方和掉落物。注意，在你使用了datagen后，每次有新的datagen的时候你必须运行Data Generation脚本。有些文件是会冲突的，你必须妥善处理好这些冲突。感兴趣可以看一下原视频的 [第11集 DataGenerationSetup](https://www.youtube.com/watch?v=ELHvhvuGF3U&list=PLKGarocXCE1H_HxOYihQMq0mlpqiUJj4L&index=11)
 
+
+* **非方块的方块(如按钮、半砖、楼梯等)**：这里都用了`registerNonBlockBlock()`，写了FIRST_STAIR、FIRST_SLAB、FIRST_BUTTON、FIRST_FENCE、FIRST_WALL作为示例。注意，这里的这五种NonBlock-Blocks部分使用了Datagen(因为NonBlock-Blocks的json配置实在太过复杂;使用datagen可以让这些方块直接基于first_block渲染其模型)。如果你的datagen没有生效，请检查是否在build.gradle中开启：需要手动设置请查阅 [FabricAPI Datagen Setup](https://wiki.fabricmc.net/zh_cn:tutorial:datagen_setup)。生成后的文件在main/generated下。
+注意：FabricModelProvider类需要在client端中引用，这里把所有的Provider都放在client下了。此外，_**没有用datagen的方块也会被自动创建一些json文件**_，写在了`client/java/com/shr1mp4zh/fmod/Shr1mpfmodDataGeneratorClient.java`里。
 
 ---
 
