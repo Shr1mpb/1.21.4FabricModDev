@@ -14,5 +14,7 @@
   "item.shr1mpfmod.first_button": "天外宝石按钮",
   "item.shr1mpfmod.first_fence": "天外宝石栅栏",
   "item.shr1mpfmod.first_wall": "天外宝石围墙",
-  "item.shr1mpfmod.heaven_lamp_block": "天外灯块"
+  "item.shr1mpfmod.heaven_lamp_block": "天外灯块",
+  "tooltip.shr1mpfmod.chisel.shift_tip": "按下 §bshift§r 查看最后一块更改方块的坐标",
+  "tooltip.shr1mpfmod.chisel.coordinates": "上个操作的方块的坐标是："
 }

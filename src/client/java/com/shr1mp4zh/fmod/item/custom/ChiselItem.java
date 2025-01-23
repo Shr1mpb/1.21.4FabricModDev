@@ -1,7 +1,9 @@
 package com.shr1mp4zh.fmod.item.custom;
 
+import com.shr1mp4zh.fmod.component.ModDataComponentTypes;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -13,6 +15,7 @@ import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
 import java.util.List;
@@ -57,7 +60,8 @@ public class ChiselItem extends Item {
                         item -> Objects.requireNonNull(context.getPlayer()).sendEquipmentBreakStatus(item, EquipmentSlot.MAINHAND));
 
                 world.playSound(null, context.getBlockPos(), SoundEvents.BLOCK_GRINDSTONE_USE, SoundCategory.BLOCKS);
-
+                //记录坐标
+                context.getStack().set(ModDataComponentTypes.COORDINATES, context.getBlockPos());
             }
             //成功并且能够显示右击的动画
             return ActionResult.SUCCESS;
@@ -69,6 +73,15 @@ public class ChiselItem extends Item {
     @Override
     public void appendTooltip(ItemStack stack, TooltipContext context, List<Text> tooltip, TooltipType type) {
         tooltip.add(Text.translatable("tooltip.shr1mpfmod.chisel.tooltip"));
+        BlockPos blockPos = stack.get(ModDataComponentTypes.COORDINATES);
+        if (blockPos != null) {
+            if(Screen.hasShiftDown()) {
+                tooltip.add(Text.translatable("tooltip.shr1mpfmod.chisel.coordinates"));
+                tooltip.add(Text.literal(blockPos.getX() + " , " + blockPos.getY() + " , " + blockPos.getZ()));
+            } else {
+                tooltip.add(Text.translatable("tooltip.shr1mpfmod.chisel.shift_tip"));
+            }
+        }
         super.appendTooltip(stack, context, tooltip, type);
     }
 }
