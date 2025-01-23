@@ -86,7 +86,7 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 
 * **非方块的方块(如按钮、半砖、楼梯等)**：这里都用了`registerNonBlockBlock()`，写了FIRST_STAIR、FIRST_SLAB、FIRST_BUTTON、FIRST_FENCE、FIRST_WALL作为示例。注意，这里的这五种NonBlock-Blocks部分使用了Datagen(因为NonBlock-Blocks的json配置实在太过复杂;使用datagen可以让这些方块直接基于first_block渲染其模型)。如果你的datagen没有生效，请检查是否在build.gradle中开启：需要手动设置请查阅 [FabricAPI Datagen Setup](https://wiki.fabricmc.net/zh_cn:tutorial:datagen_setup)。生成后的文件在main/generated下。
-注意：FabricModelProvider类需要在client端中引用，这里把所有的Provider都放在client下了。此外，_**没有用datagen的方块也会被自动创建一些json文件**_，写在了`client/java/com/shr1mp4zh/fmod/Shr1mpfmodDataGeneratorClient.java`里。
+注意：FabricModelProvider类需要在client端中引用，这里把所有的Provider都放在client下了。此外，_**没有用datagen的方块也会被自动创建一些json文件**_，相关内容注释写在了`client/java/com/shr1mp4zh/fmod/Shr1mpfmodDataGeneratorClient.java`里。
 
 ---
 

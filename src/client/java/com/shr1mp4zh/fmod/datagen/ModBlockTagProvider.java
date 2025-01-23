@@ -24,7 +24,8 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
                 .add(ModBlocks.FIRST_WALL)
                 .add(ModBlocks.FIRST_FENCE)
                 .add(ModBlocks.FIRST_BLOCK)
-                .add(ModBlocks.SECOND_BLOCK);
+                .add(ModBlocks.SECOND_BLOCK)
+                .add(ModBlocks.HEAVEN_LAMP_BLOCK);
         //钻石等级采掘
         getOrCreateTagBuilder(BlockTags.NEEDS_DIAMOND_TOOL)
                 .add(ModBlocks.SECOND_BLOCK);

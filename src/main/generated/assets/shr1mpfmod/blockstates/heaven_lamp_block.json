@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "clicked=false": {
+      "model": "shr1mpfmod:block/heaven_lamp_block"
+    },
+    "clicked=true": {
+      "model": "shr1mpfmod:block/heaven_lamp_block_on"
+    }
+  }
+}

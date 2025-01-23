@@ -1,6 +1,7 @@
 package com.shr1mp4zh.fmod.block;
 
 import com.shr1mp4zh.fmod.Shr1mpfmod;
+import com.shr1mp4zh.fmod.block.custom.HeavenLampBlock;
 import com.shr1mp4zh.fmod.block.custom.MagicBlock;
 import com.shr1mp4zh.fmod.item.ModItems;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
@@ -41,6 +42,7 @@ public class ModBlocks {
     public static final Block FIRST_BUTTON;
     public static final Block FIRST_FENCE;
     public static final Block FIRST_WALL;
+    public static final Block HEAVEN_LAMP_BLOCK;
     static{
         BlockSettingUnion firstBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("first_block",true);
         firstBlockSetting.getBlockSettings().strength(6f);
@@ -60,6 +62,10 @@ public class ModBlocks {
         FIRST_FENCE = registerNonBlockBlock(FenceBlock.class, ModBlocks.FIRST_BLOCK, null, null, BlockSettingUnion.createDefaultBlockSettingUnion("first_fence", true), ItemGroups.BUILDING_BLOCKS);
         FIRST_WALL = registerNonBlockBlock(WallBlock.class, ModBlocks.FIRST_BLOCK, null, null, BlockSettingUnion.createDefaultBlockSettingUnion("first_wall", true), ItemGroups.BUILDING_BLOCKS);
 
+        //天外灯块(双状态换亮度方块)
+        BlockSettingUnion heavenLampBlockSetting = BlockSettingUnion.createDefaultBlockSettingUnion("heaven_lamp_block", true);
+        heavenLampBlockSetting.getBlockSettings().luminance(state -> state.get(HeavenLampBlock.CLICKED) ? 30 : 0);//luminance根据状态设置亮度
+        HEAVEN_LAMP_BLOCK = registerCustomBlock(HeavenLampBlock.class, heavenLampBlockSetting, ItemGroups.BUILDING_BLOCKS);
     }
 
 

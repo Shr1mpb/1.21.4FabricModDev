@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cube_all",
+  "textures": {
+    "all": "shr1mpfmod:block/heaven_lamp_block_on"
+  }
+}

@@ -21,5 +21,6 @@ public class ModLootTableProvider extends FabricBlockLootTableProvider {
         addDrop(ModBlocks.FIRST_STAIR);
         addDrop(ModBlocks.FIRST_BUTTON);
         addDrop(ModBlocks.FIRST_WALL);
+        addDrop(ModBlocks.HEAVEN_LAMP_BLOCK);
     }
 }

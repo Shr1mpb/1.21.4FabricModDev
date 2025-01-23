@@ -6,6 +6,7 @@
     "shr1mpfmod:first_wall",
     "shr1mpfmod:first_fence",
     "shr1mpfmod:first_block",
-    "shr1mpfmod:second_block"
+    "shr1mpfmod:second_block",
+    "shr1mpfmod:heaven_lamp_block"
   ]
 }
