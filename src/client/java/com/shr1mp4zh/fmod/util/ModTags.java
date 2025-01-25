@@ -20,7 +20,7 @@ public class ModTags {
     }
 
     public static class Items {
-//        public static final TagKey<Item>  =
+        public static final TagKey<Item> MAGIC_BLOCK_TRANSFORMABLE = createTag("magic_block_transformable");
 
         private static TagKey<Item> createTag(String name) {
             return TagKey.of(RegistryKeys.ITEM, Identifier.of(Shr1mpfmod.MOD_ID, name));

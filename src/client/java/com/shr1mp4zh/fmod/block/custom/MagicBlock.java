@@ -1,6 +1,7 @@
 package com.shr1mp4zh.fmod.block.custom;
 
 import com.shr1mp4zh.fmod.item.ModItems;
+import com.shr1mp4zh.fmod.util.ModTags;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.Entity;
@@ -8,7 +9,6 @@ import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.item.tooltip.TooltipType;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
@@ -48,17 +48,15 @@ public class MagicBlock extends Block {
     }
 
     /**
-     * 在MagicBlock上丢first_item会被转化成cauliflower
+     * 在MagicBlock上丢starlight_ashes会被转化成cauliflower
      */
     @Override
     public void onSteppedOn(World world, BlockPos pos, BlockState state, Entity entity) {
         if (!world.isClient) {
-            if (entity instanceof ItemEntity item) {//把掉落在它上面的FIRST_ITEM 转化为 钻石
-                if (item.getStack().getItem() == ModItems.FIRST_ITEM) {
-                    item.setStack(new ItemStack(Items.DIAMOND, item.getStack().getCount()));
-                }
-                if (item.getStack().getItem() == ModItems.STARLIGHT_ASHES) {//把掉落在它上面的STARLIGHT_ASHES 转化为 岩浆桶
-                    item.setStack(new ItemStack(Items.NETHER_STAR, item.getStack().getCount()));
+            //更新：加一层自定义标签判断
+            if (entity instanceof ItemEntity item) {
+                if (item.getStack().isIn(ModTags.Items.MAGIC_BLOCK_TRANSFORMABLE)) {
+                        item.setStack(new ItemStack(ModItems.CAULIFLOWER, item.getStack().getCount()));
                 }
             }
             super.onSteppedOn(world, pos, state, entity);

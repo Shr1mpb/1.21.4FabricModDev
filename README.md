@@ -1,7 +1,12 @@
-*更新时间： 2025.1.23*
+*更新时间： 2025.1.25*
 
 # 更新日志 (自2025.1.23)
 
+
+>### 2025.1.25 - 更新了tags的相关类
+> 加入util/ModTags用于创建自定义标签，并加入了ModItemTagProvider类
+> 
+> 现在可以仿照MagicBlock的相关代码来使用自定义标签了
 
 >### 2025.1.23 - fabric从0.114.2换成0.115.0;文件调整到client
 >
@@ -85,10 +90,10 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 * **设置物品提示**：参考`src/client/java/com/shr1mp4zh/fmod/block/custom/MagicBlock`中的`appendToolTip()`。方法就是写一个物品类的子类，并且重写其appendToolTip()方法。此外，还可以添加`if(Screen.hasShiftDown())`判断来动态添加提示内容。
 
 
-* **关于自定义标签(CustomTags)**：这里没有做自定义标签的相关内容。自定义标签的作用是，能把特定的物品配置到 json 文件中，然后在代码中用一行就可以从文件中检索，比起配置到java类中要清爽很多。感兴趣可以看一下原视频的 [第10集 CustomTags](https://www.youtube.com/watch?v=lVpV3B3yFsg) 。
+* **关于自定义标签(CustomTags)**：参考MagicBlock类中的onSteppedOn方法中的使用。自定义标签的作用是，能把特定的物品配置到 json 文件中，然后在代码中用一行就可以从文件中检索，比起配置到java类中要清爽很多。非必须，但建议学习。感兴趣可以看一下原视频的 [第10集 CustomTags](https://www.youtube.com/watch?v=lVpV3B3yFsg) 。
 
 
-* **关于数据生成(DataGeneration)**：数据生成的用法就是在`java/com/shr1mp4zh/fmod/datagen`中。开发简化了很多步骤，但是还有小部分使用json来配置。作用是：使用新的数据生成类，可以允许你不写很多的json文件(例如，`resources`文件夹下的`assets/shr1mpfmod/blockstates&items&models`、`data/shr1mpfmod/loot_table&recipe`,还有`mineable`文件夹中配置的可以采掘的工具)，只留下textures就能把物品的模型渲染，并且可以在程序里配置配方和掉落物。注意，在你使用了datagen后，每次有新的datagen的时候你必须运行Data Generation脚本。有些文件是会冲突的，你必须妥善处理好这些冲突。感兴趣可以看一下原视频的 [第11集 DataGenerationSetup](https://www.youtube.com/watch?v=ELHvhvuGF3U&list=PLKGarocXCE1H_HxOYihQMq0mlpqiUJj4L&index=11)
+* **关于数据生成(DataGeneration)**：(建议必须学习)数据生成的用法就是在`java/com/shr1mp4zh/fmod/datagen`中。开发简化了很多步骤，但是还有小部分使用json来配置。作用是：使用新的数据生成类，可以允许你不写很多的json文件(例如，`resources`文件夹下的`assets/shr1mpfmod/blockstates&items&models`、`data/shr1mpfmod/loot_table&recipe`,还有`mineable`文件夹中配置的可以采掘的工具)，只留下textures就能把物品的模型渲染，并且可以在程序里配置配方和掉落物。注意，在你使用了datagen后，每次有新的datagen的时候你必须运行Data Generation脚本。有些文件是会冲突的，你必须妥善处理好这些冲突。感兴趣可以看一下原视频的 [第11集 DataGenerationSetup](https://www.youtube.com/watch?v=ELHvhvuGF3U&list=PLKGarocXCE1H_HxOYihQMq0mlpqiUJj4L&index=11)
 
 
 * **非方块的方块(如按钮、半砖、楼梯等)**：这里都用了`registerNonBlockBlock()`，写了FIRST_STAIR、FIRST_SLAB、FIRST_BUTTON、FIRST_FENCE、FIRST_WALL作为示例。注意，这里的这五种NonBlock-Blocks部分使用了Datagen(因为NonBlock-Blocks的json配置实在太过复杂;使用datagen可以让这些方块直接基于first_block渲染其模型)。如果你的datagen没有生效，请检查是否在build.gradle中开启：需要手动设置请查阅 [FabricAPI Datagen Setup](https://wiki.fabricmc.net/zh_cn:tutorial:datagen_setup)。生成后的文件在main/generated下。
