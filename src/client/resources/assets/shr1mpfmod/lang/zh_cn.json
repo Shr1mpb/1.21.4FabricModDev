@@ -16,5 +16,10 @@
   "item.shr1mpfmod.first_wall": "天外宝石围墙",
   "item.shr1mpfmod.heaven_lamp_block": "天外灯块",
   "tooltip.shr1mpfmod.chisel.shift_tip": "按下 §bshift§r 查看最后更改的方块的坐标",
-  "tooltip.shr1mpfmod.chisel.coordinates": "上个操作的方块的坐标是："
+  "tooltip.shr1mpfmod.chisel.coordinates": "上个操作的方块的坐标是：",
+  "item.shr1mpfmod.heaven_sword": "天外宝石剑",
+  "item.shr1mpfmod.heaven_pickaxe": "天外宝石镐",
+  "item.shr1mpfmod.heaven_axe": "天外宝石斧",
+  "item.shr1mpfmod.heaven_shovel": "天外宝石铲",
+  "item.shr1mpfmod.heaven_hoe": "天外宝石锄"
 }

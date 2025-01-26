@@ -16,5 +16,11 @@
   "item.shr1mpfmod.first_wall": "heaven gem wall",
   "item.shr1mpfmod.heaven_lamp_block": "heaven lamp block",
   "tooltip.shr1mpfmod.chisel.shift_tip": "Press §bshift§r to see the last block changed",
-  "tooltip.shr1mpfmod.chisel.coordinates" : "Last block`s coordinates:"
+  "tooltip.shr1mpfmod.chisel.coordinates" : "Last block`s coordinates:",
+  "item.shr1mpfmod.heaven_sword": "heaven gem sword",
+  "item.shr1mpfmod.heaven_pickaxe": "heaven gem pickaxe",
+  "item.shr1mpfmod.heaven_axe": "heaven gem axe",
+  "item.shr1mpfmod.heaven_shovel": "heaven gem shovel",
+  "item.shr1mpfmod.heaven_hoe": "heaven gem hoe"
+
 }

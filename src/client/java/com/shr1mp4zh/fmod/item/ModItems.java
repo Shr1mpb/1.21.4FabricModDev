@@ -8,9 +8,7 @@ import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemGroup;
-import net.minecraft.item.ItemGroups;
+import net.minecraft.item.*;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -38,6 +36,12 @@ public class ModItems {
     //注册自定义燃料+堆肥 并设置最大堆叠数量为16 稀有度 并设置发光 设置燃料和堆肥的方法在本类中的最下方
     public static final Item STARLIGHT_ASHES = registerItem(createDefaultItemSettings("starlight_ashes").maxCount(16).rarity(Rarity.UNCOMMON).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true));
 
+    //注册天外工具
+    public static final Item HEAVEN_SWORD = registerToolItem(SwordItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 6.0f, -2.0f, createDefaultItemSettings("heaven_sword"), ItemGroups.COMBAT);
+    public static final Item HEAVEN_PICKAXE = registerToolItem(PickaxeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 3.0f, -2.4f, createDefaultItemSettings("heaven_pickaxe"), ItemGroups.TOOLS);
+    public static final Item HEAVEN_AXE = registerToolItem(AxeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 9.0f, -2.8f, createDefaultItemSettings("heaven_axe"), ItemGroups.COMBAT);
+    public static final Item HEAVEN_SHOVEL = registerToolItem(ShovelItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 2.0f, -1.6f, createDefaultItemSettings("heaven_shovel"), ItemGroups.TOOLS);
+    public static final Item HEAVEN_HOE = registerToolItem(HoeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 1.0f, -1.2f, createDefaultItemSettings("heaven_hoe"), ItemGroups.TOOLS);
 
     //下面都是封装好的方法 勿动
     /**
@@ -133,6 +137,32 @@ public class ModItems {
     }
 
     /**
+     * 用于快速创建 工具物品 的方法
+     * @param material 剑的材料 一般放在ModMaterials.ModToolMaterials中
+     * @param attackDamage (攻击伤害 = 原料附加伤害 + 这里的伤害 + 1) 钻石是 3 + 3 + 1 = 7
+     * @param attackSpeed 攻击速度!!负数 钻石剑 （-2.4F） 钻石斧（-3.0F） 越小越慢 注意是负数 游戏内显示的攻击速度是 4 + attackSpeed 越高越快
+     * @param settings createDefaultItemSettings创建的settings
+     * @param itemGroups 要加入的组
+     * @return 返回创建好的工具
+     */
+    @SafeVarargs
+    private static Item registerToolItem(Class toolClass,ToolMaterial material, float attackDamage, float attackSpeed, Item.Settings settings, RegistryKey<ItemGroup>... itemGroups) {
+        Identifier identifier = settings.getModelId();
+        Item customItem;
+        try {
+            Constructor constructor = Objects.requireNonNull(toolClass).getConstructor(ToolMaterial.class,float.class,float.class,Item.Settings.class);
+            customItem = (Item) constructor.newInstance(material, attackDamage, attackSpeed, settings);
+        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+            throw new RuntimeException(e);
+        }
+        Item registeredItem = Registry.register(Registries.ITEM, identifier, customItem);
+        for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
+            ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
+        }
+        return registeredItem;
+    }
+
+    /**
      * 根据物品名字创建一个带有ID的Item.Settings 勿动
      * @param id 物品ID
      * @return 返回Item.Settings
@@ -153,7 +183,7 @@ public class ModItems {
     }
 
     /**
-     * 注册堆肥物品 把要注册的物品写在下面的lambda即可
+     * 注册堆肥物品 把要注册的物品写在下面即可
      */
     public static void registerCompostingItems() {
         // 这里仿照这个语句写 来注册可堆肥的物品 后面的Float类型是堆肥概率

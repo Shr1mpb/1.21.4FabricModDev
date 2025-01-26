@@ -1,6 +1,7 @@
 package com.shr1mp4zh.fmod.datagen;
 
 import com.shr1mp4zh.fmod.block.ModBlocks;
+import com.shr1mp4zh.fmod.util.ModTags;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.registry.RegistryWrapper;
@@ -36,6 +37,10 @@ public class ModBlockTagProvider extends FabricTagProvider.BlockTagProvider {
         getOrCreateTagBuilder(BlockTags.BUTTONS).add(ModBlocks.FIRST_BUTTON);
         getOrCreateTagBuilder(BlockTags.FENCES).add(ModBlocks.FIRST_FENCE);
         getOrCreateTagBuilder(BlockTags.WALLS).add(ModBlocks.FIRST_WALL);
+
+        //配置heaven tool的采掘等级 这里设置为相当于比钻石高一级
+        getOrCreateTagBuilder(ModTags.Blocks.NEEDS_HEAVEN_TOOL)
+                .addTag(BlockTags.NEEDS_DIAMOND_TOOL);
 
 
     }

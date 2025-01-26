@@ -32,6 +32,11 @@ public class ModItemGroups {
         firstItemList.add(ModBlocks.FIRST_FENCE);
         firstItemList.add(ModBlocks.FIRST_WALL);
         firstItemList.add(ModBlocks.HEAVEN_LAMP_BLOCK);
+        firstItemList.add(ModItems.HEAVEN_SWORD);
+        firstItemList.add(ModItems.HEAVEN_PICKAXE);
+        firstItemList.add(ModItems.HEAVEN_AXE);
+        firstItemList.add(ModItems.HEAVEN_SHOVEL);
+        firstItemList.add(ModItems.HEAVEN_HOE);
 
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }
