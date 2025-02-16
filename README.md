@@ -1,10 +1,14 @@
-*更新时间： 2025.1.26*
+*更新时间： 2025.2.16*
 
 # 更新日志 (自2025.1.23)
 
+>### 2025.2.16 - 更新了创建自定义事件的指引
+> 以`item/custom`下的`HammerItem`的破坏3x3方块为例
+> 
+> 现在可以跟随README.md的`自定义事件`指引来实现自定义事件了
 
 >### 2025.1.26 - 更新了创建自定义工具的相关方法
-> ModItems类中新增registerToolItem方法用于注册自定义工具；新增ModMaterial类定义原材料
+> `ModItems`类中新增`registerToolItem`方法用于注册自定义工具；新增ModMaterial类定义原材料
 >
 > 现在可以仿照heaven_sword的相关代码，跟着README.md的指引来创建自定义的工具了
 > 
@@ -118,6 +122,9 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 **要设置工具的采掘等级**，需要使用`needs_xxx_tool`标签并向内添加其他标签(参考`needs_heaven_tool`，比如这里设置它比钻石高一级，即可以采掘需要钻石工具的方块，注意`addTag()`方法需要你在本mod中有对应的json文件)。
 **要让工具对应正常的附魔**，需要将这些工具添加到对应工具Tag中(详见ModItemTagProvider)。
 
+
+* **自定义事件**：以`item/custom`下的`HammerItem`的破坏3x3方块为例，创建一个HammerItem类并添加了一些要用的方法(当然也可以把这个方法放在别处，此处这个方法指获取破坏的方块)，之后在`ModItems`中注册该物品；
+要实现破坏3x3方块，在`events`包下创建了新的`HammerUsageEvent`类并在`Shr1mpfmodClient`中注册了该类，在这个类中要写一些与破坏相关的逻辑，这样以来就创建好了。
 ---
 
 下面是一些我的废话：

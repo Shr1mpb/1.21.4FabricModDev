@@ -1,7 +1,7 @@
 // 1.21.4	-999999999-01-01T00:00:00	shr1mpfmod/Tags for minecraft:item
 617b86dbd9bd31459570e92ca08cbed420718f3e data/minecraft/tags/item/axes.json
 89989e1650da0bd7465e7c242fee4416943989ed data/minecraft/tags/item/hoes.json
-5786aa57422789a323c69c7beda6995f4682368f data/minecraft/tags/item/pickaxes.json
+78771ea7ea6b86bea944b713a0468fb08648c8a2 data/minecraft/tags/item/pickaxes.json
 d01a7310424bc62fbd2017c658cfb995af22ce1b data/minecraft/tags/item/shovels.json
 843f40e3692ae690abd8649ff84f4b4b7f8fd745 data/minecraft/tags/item/swords.json
 8b333a3d8646f33870c6649f815a7316208d15f8 data/shr1mpfmod/tags/item/magic_block_transformable.json

@@ -2,6 +2,7 @@ package com.shr1mp4zh.fmod.item;
 
 import com.shr1mp4zh.fmod.Shr1mpfmod;
 import com.shr1mp4zh.fmod.item.custom.ChiselItem;
+import com.shr1mp4zh.fmod.item.custom.HammerItem;
 import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.fabricmc.fabric.api.registry.CompostingChanceRegistry;
 import net.fabricmc.fabric.api.registry.FuelRegistryEvents;
@@ -42,6 +43,8 @@ public class ModItems {
     public static final Item HEAVEN_AXE = registerToolItem(AxeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 9.0f, -2.8f, createDefaultItemSettings("heaven_axe"), ItemGroups.COMBAT);
     public static final Item HEAVEN_SHOVEL = registerToolItem(ShovelItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 2.0f, -1.6f, createDefaultItemSettings("heaven_shovel"), ItemGroups.TOOLS);
     public static final Item HEAVEN_HOE = registerToolItem(HoeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 1.0f, -1.2f, createDefaultItemSettings("heaven_hoe"), ItemGroups.TOOLS);
+    //自定义天外工具：锤
+    public static final Item HEAVEN_HAMMER = registerToolItem(HammerItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 5.0f, -2.0f, createDefaultItemSettings("heaven_hammer"), ItemGroups.TOOLS);
 
     //下面都是封装好的方法 勿动
     /**

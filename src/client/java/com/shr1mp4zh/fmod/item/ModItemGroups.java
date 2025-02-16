@@ -37,6 +37,7 @@ public class ModItemGroups {
         firstItemList.add(ModItems.HEAVEN_AXE);
         firstItemList.add(ModItems.HEAVEN_SHOVEL);
         firstItemList.add(ModItems.HEAVEN_HOE);
+        firstItemList.add(ModItems.HEAVEN_HAMMER);
 
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }

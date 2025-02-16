@@ -19,8 +19,9 @@ public class ModModelProvider extends FabricModelProvider {
      *    方块模型json文件生成 还需要少量手动json
      *    以first_block为例，在本类注册了，刚开始有 blockstates和items 下的第一层， models/block 和 models/item 下的第二层 ，还有textures第三层
      *         注册后，前三个都被自动创建
-     *         再以magic_block(或second_block)为例，在本类没有创建，但是它们都是方块，它们的第2个(即items)被自动创建了。
-     *         因此，加入datagen后需要对已有的json文件都进行一波更改
+     *         未注册的物品也会自动注册一项：例如
+     *          再以magic_block(或second_block)为例，在本类没有创建，但是它们都是方块，它们的第2个(即items)被自动创建了。
+     *          因此，加入datagen后需要对已有的json文件都进行一波更改
      */
     @Override
     public void generateBlockStateModels(BlockStateModelGenerator blockStateModelGenerator) {
@@ -55,6 +56,9 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.HEAVEN_AXE, Models.HANDHELD);
         itemModelGenerator.register(ModItems.HEAVEN_SHOVEL, Models.HANDHELD);
         itemModelGenerator.register(ModItems.HEAVEN_HOE, Models.HANDHELD);
+
+        //自定义工具(其实和上方写法一样)
+        itemModelGenerator.register(ModItems.HEAVEN_HAMMER, Models.HANDHELD);
 
     }
 

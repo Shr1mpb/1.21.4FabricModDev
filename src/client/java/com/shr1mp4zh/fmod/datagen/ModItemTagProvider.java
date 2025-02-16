@@ -30,7 +30,8 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.SWORDS)
                 .add(ModItems.HEAVEN_SWORD);
         getOrCreateTagBuilder(ItemTags.PICKAXES)
-                .add(ModItems.HEAVEN_PICKAXE);
+                .add(ModItems.HEAVEN_PICKAXE)
+                .add(ModItems.HEAVEN_HAMMER);
         getOrCreateTagBuilder(ItemTags.AXES)
                 .add(ModItems.HEAVEN_AXE);
         getOrCreateTagBuilder(ItemTags.SHOVELS)

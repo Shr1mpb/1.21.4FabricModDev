@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/handheld",
+  "textures": {
+    "layer0": "shr1mpfmod:item/heaven_hammer"
+  }
+}
