@@ -2,6 +2,14 @@
 
 # 更新日志 (自2025.1.23)
 
+>### 2025.2.23 - 更新了创建自定义盔甲的指引；更新Fabric版本
+> 以`heaven_helmet/chestplate/leggings/boots`一套天外盔甲为例，添加并封装了创建自定义盔甲的必要函数
+>
+> 现在可以跟随README.md的`自定义盔甲`指引来创建自定义盔甲了
+> 
+> 更新Fabric版本，从 0.115.0+1.21.4 更新到 0.118.0+1.21.4
+
+
 >### 2025.2.16 - 更新了创建自定义事件的指引
 > 以`item/custom`下的`HammerItem`的破坏3x3方块为例
 > 
@@ -125,6 +133,17 @@ _如果你需要帮助，我的邮箱是1205874457@qq.com(常用) / chnrzh2004@g
 
 * **自定义事件**：以`item/custom`下的`HammerItem`的破坏3x3方块为例，创建一个HammerItem类并添加了一些要用的方法(当然也可以把这个方法放在别处，此处这个方法指获取破坏的方块)，之后在`ModItems`中注册该物品；
 要实现破坏3x3方块，在`events`包下创建了新的`HammerUsageEvent`类并在`Shr1mpfmodClient`中注册了该类，在这个类中要写一些与破坏相关的逻辑，这样以来就创建好了。
+
+
+* **自定义盔甲**：自定义盔甲比较复杂，建议参考步骤和heaven套装的代码理解，步骤如下：
+首先在`ModMaterials.ModArmorMaterial`中使用封装好的创建材料的函数创建盔甲材料(_与其说是盔甲材料，不如说是盔甲的基准_)；然后在`ModItems`中使用封装好的方法注册相对应的盔甲；
+之后在`ModItemTagProvider`中的`ItemTags.TRIMMABLE_ARMOR`标签内添加创建好的盔甲，使其能够在锻造台上被雕刻；再然后，在`ModModelProvider`中跟随指引使用盔甲的Datagen(注意会使用到创建盔甲材料时的代码，请确保盔甲前缀与后续的材质相对应，这一步只是创建了各种雕刻，并没有创建和引用盔甲的模型)；
+* 最后**添加盔甲材质**：**在`assets/【modId】`文件夹中**添加分为三步：
+
+> 1. 在`textures/item`文件夹下添加盔甲拿在手中的材质(这一步的json文件已经被datagen生成)；
+> 2. 在`textures/entity/equipment`文件夹下添加两个模型材质，并**以注册盔甲材料时使用的盔甲前缀命名**(`equipment/humanoid`文件夹存放头盔、胸甲的材质，`equipment/humanoid_leggings`文件夹存放护腿、靴子的材质)；
+> 3. 为了使盔甲模型正常显示，需要手动添加一个json文件：`equipment`文件夹下，添加**以注册盔甲材料时使用的盔甲前缀命名**的json文件，内容仿照heaven.json写入即可。
+
 ---
 
 下面是一些我的废话：

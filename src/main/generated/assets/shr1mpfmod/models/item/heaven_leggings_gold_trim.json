@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "shr1mpfmod:item/heaven_leggings",
+    "layer1": "minecraft:trims/items/leggings_trim_gold"
+  }
+}

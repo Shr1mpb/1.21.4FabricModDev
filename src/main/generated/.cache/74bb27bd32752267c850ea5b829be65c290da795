@@ -4,5 +4,6 @@
 78771ea7ea6b86bea944b713a0468fb08648c8a2 data/minecraft/tags/item/pickaxes.json
 d01a7310424bc62fbd2017c658cfb995af22ce1b data/minecraft/tags/item/shovels.json
 843f40e3692ae690abd8649ff84f4b4b7f8fd745 data/minecraft/tags/item/swords.json
+a8d85e93d88253979d61915f51cb861f72850696 data/minecraft/tags/item/trimmable_armor.json
 8b333a3d8646f33870c6649f815a7316208d15f8 data/shr1mpfmod/tags/item/magic_block_transformable.json
 41e01b7a2d08934bf39033d23fec0ea48b6a40a8 data/shr1mpfmod/tags/item/repairs_heaven_armor.json

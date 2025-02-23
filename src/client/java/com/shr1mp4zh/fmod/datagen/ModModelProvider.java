@@ -1,5 +1,6 @@
 package com.shr1mp4zh.fmod.datagen;
 
+import com.shr1mp4zh.fmod.Shr1mpfmod;
 import com.shr1mp4zh.fmod.block.ModBlocks;
 import com.shr1mp4zh.fmod.block.custom.HeavenLampBlock;
 import com.shr1mp4zh.fmod.item.ModItems;
@@ -7,6 +8,9 @@ import net.fabricmc.fabric.api.client.datagen.v1.provider.FabricModelProvider;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.minecraft.block.Block;
 import net.minecraft.client.data.*;
+import net.minecraft.item.equipment.EquipmentAsset;
+import net.minecraft.item.equipment.EquipmentAssetKeys;
+import net.minecraft.registry.RegistryKey;
 import net.minecraft.state.property.BooleanProperty;
 import net.minecraft.util.Identifier;
 
@@ -59,6 +63,14 @@ public class ModModelProvider extends FabricModelProvider {
 
         //自定义工具(其实和上方写法一样)
         itemModelGenerator.register(ModItems.HEAVEN_HAMMER, Models.HANDHELD);
+
+        //盔甲 这里用于生成锻造台的纹样等
+        //这里的第一行是复制了创建盔甲材料时用到的东西
+        RegistryKey<EquipmentAsset> heavenArmorKey = RegistryKey.of(EquipmentAssetKeys.REGISTRY_KEY, Identifier.of(Shr1mpfmod.MOD_ID, "heaven"));
+        itemModelGenerator.registerArmor(ModItems.HEAVEN_HELMET, heavenArmorKey, "helmet", false);
+        itemModelGenerator.registerArmor(ModItems.HEAVEN_CHESTPLATE, heavenArmorKey, "chestplate", false);
+        itemModelGenerator.registerArmor(ModItems.HEAVEN_LEGGINGS, heavenArmorKey, "leggings", false);
+        itemModelGenerator.registerArmor(ModItems.HEAVEN_BOOTS, heavenArmorKey, "boots", false);
 
     }
 

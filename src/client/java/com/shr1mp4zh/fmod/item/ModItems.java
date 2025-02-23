@@ -10,6 +10,8 @@ import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ConsumableComponent;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.*;
+import net.minecraft.item.equipment.ArmorMaterial;
+import net.minecraft.item.equipment.EquipmentType;
 import net.minecraft.registry.*;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.Rarity;
@@ -45,6 +47,12 @@ public class ModItems {
     public static final Item HEAVEN_HOE = registerToolItem(HoeItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 1.0f, -1.2f, createDefaultItemSettings("heaven_hoe"), ItemGroups.TOOLS);
     //自定义天外工具：锤
     public static final Item HEAVEN_HAMMER = registerToolItem(HammerItem.class, ModMaterials.ModToolMaterials.HEAVEN_TOOL_MATERIAL, 5.0f, -2.0f, createDefaultItemSettings("heaven_hammer"), ItemGroups.TOOLS);
+
+    //注册天外盔甲一套
+    public static final Item HEAVEN_HELMET = registerArmorItem(EquipmentType.HELMET, ModMaterials.ModArmorMaterials.HEAVEN_ARMOR_MATERIAL, "heaven_helmet", ItemGroups.COMBAT);
+    public static final Item HEAVEN_CHESTPLATE = registerArmorItem(EquipmentType.CHESTPLATE, ModMaterials.ModArmorMaterials.HEAVEN_ARMOR_MATERIAL, "heaven_chestplate", ItemGroups.COMBAT);
+    public static final Item HEAVEN_LEGGINGS = registerArmorItem(EquipmentType.LEGGINGS, ModMaterials.ModArmorMaterials.HEAVEN_ARMOR_MATERIAL, "heaven_leggings", ItemGroups.COMBAT);
+    public static final Item HEAVEN_BOOTS = registerArmorItem(EquipmentType.BOOTS, ModMaterials.ModArmorMaterials.HEAVEN_ARMOR_MATERIAL, "heaven_boots", ItemGroups.COMBAT);
 
     //下面都是封装好的方法 勿动
     /**
@@ -162,6 +170,42 @@ public class ModItems {
         for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
             ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
         }
+        return registeredItem;
+    }
+
+    /**
+     * 用于快速创建 防具物品 的方法
+     * @param equipmentType 防具类型 HELMET/CHESTPLATE/LEGGINGS/BOOTS
+     * @param armorMaterial 护甲原料 在ModMaterials.ModArmorMaterials类中注册
+     * @param id 护甲id
+     * @param itemGroups 要加入的物品组
+     * @return 返回创建好的护甲
+     */
+    @SafeVarargs
+    public static Item registerArmorItem(EquipmentType equipmentType, ArmorMaterial armorMaterial, String id, RegistryKey<ItemGroup>... itemGroups) {
+        Item registeredItem;
+        Identifier identifier = Identifier.of(Shr1mpfmod.MOD_ID, id);
+        Item.Settings settings;
+        if (equipmentType == EquipmentType.HELMET) {
+            settings = createDefaultItemSettings(id).maxDamage(EquipmentType.HELMET.getMaxDamage(armorMaterial.durability()));
+            registeredItem = Registry.register(Registries.ITEM, identifier, new ArmorItem(armorMaterial,EquipmentType.HELMET,settings));
+        } else if (equipmentType == EquipmentType.CHESTPLATE) {
+            settings = createDefaultItemSettings(id).maxDamage(EquipmentType.CHESTPLATE.getMaxDamage(armorMaterial.durability()));
+            registeredItem = Registry.register(Registries.ITEM, identifier, new ArmorItem(armorMaterial,EquipmentType.CHESTPLATE,settings));
+        } else if (equipmentType == EquipmentType.LEGGINGS) {
+            settings = createDefaultItemSettings(id).maxDamage(EquipmentType.LEGGINGS.getMaxDamage(armorMaterial.durability()));
+            registeredItem = Registry.register(Registries.ITEM, identifier, new ArmorItem(armorMaterial,EquipmentType.LEGGINGS,settings));
+        }else if(equipmentType == EquipmentType.BOOTS){
+            settings = createDefaultItemSettings(id).maxDamage(EquipmentType.BOOTS.getMaxDamage(armorMaterial.durability()));
+            registeredItem = Registry.register(Registries.ITEM, identifier, new ArmorItem(armorMaterial,EquipmentType.BOOTS,settings));
+        }else{
+            throw new Error("Illegal armor type!");
+        }
+
+        for (RegistryKey<ItemGroup> itemGroup : itemGroups) {
+            ItemGroupEvents.modifyEntriesEvent(itemGroup).register(fabricItemGroupEntries -> fabricItemGroupEntries.add(registeredItem));
+        }
+
         return registeredItem;
     }
 

@@ -38,6 +38,10 @@ public class ModItemGroups {
         firstItemList.add(ModItems.HEAVEN_SHOVEL);
         firstItemList.add(ModItems.HEAVEN_HOE);
         firstItemList.add(ModItems.HEAVEN_HAMMER);
+        firstItemList.add(ModItems.HEAVEN_HELMET);
+        firstItemList.add(ModItems.HEAVEN_CHESTPLATE);
+        firstItemList.add(ModItems.HEAVEN_LEGGINGS);
+        firstItemList.add(ModItems.HEAVEN_BOOTS);
 
         FIRST_ITEM_GROUP = registerItemGroup("first_item_group",firstItemList);
     }

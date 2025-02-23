@@ -39,5 +39,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.HOES)
                 .add(ModItems.HEAVEN_HOE);
 
+        //让盔甲可以与各种可交互方块交互
+        getOrCreateTagBuilder(ItemTags.TRIMMABLE_ARMOR)
+                .add(ModItems.HEAVEN_HELMET)
+                .add(ModItems.HEAVEN_CHESTPLATE)
+                .add(ModItems.HEAVEN_LEGGINGS)
+                .add(ModItems.HEAVEN_BOOTS);
+
     }
 }

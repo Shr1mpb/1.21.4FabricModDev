@@ -1,0 +1,14 @@
+{
+  "layers": {
+    "humanoid": [
+      {
+        "texture": "shr1mpfmod:heaven"
+      }
+    ],
+    "humanoid_leggings": [
+      {
+        "texture": "shr1mpfmod:heaven"
+      }
+    ]
+  }
+}
